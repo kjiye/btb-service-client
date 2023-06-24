@@ -7,7 +7,6 @@ const Models = [{ title: "3DTest", url: "/P1.glb" }];
 
 function Model({ url }: any) {
   const gltf: Record<string, any> = useGLTF(url);
-  console.log(gltf.scene);
   return (
     <Clone
       object={gltf.scene}

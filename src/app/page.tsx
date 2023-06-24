@@ -3,11 +3,9 @@ import { useRouter } from "next/navigation";
 
 export default function Page() {
   const router = useRouter();
-  const { push, pathname, query } = router;
 
   return (
     <div style={{ padding: 50 }}>
-      <h1>Home Page</h1>
       <p>
         <button onClick={() => router.push("/view")}>
           Go to the 3d render test page
