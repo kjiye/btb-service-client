@@ -118,8 +118,8 @@ export default function Home() {
   return (
     <div
       style={{
-        width: "500px",
-        height: "500px",
+        width: "350px",
+        height: "350px",
         margin: "20px auto 0",
         backgroundColor: "black",
       }}
