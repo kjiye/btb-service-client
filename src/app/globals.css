@@ -16,12 +16,88 @@
   }
 }
 
+@font-face {
+  font-family: "kosugi";
+  src: url("../../public/font/Kosugi-Regular.ttf");
+}
+
+* {
+  font-family: "kosugi";
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white;
+}
+
+.header {
+  background-color: azure;
+  padding: 15px;
+  color: black;
+}
+
+.content {
+  margin: 0 auto;
+  color: black;
+  text-align: center;
+  font-size: 15px;
+}
+
+.content.pc {
+  width: 1280px;
+  height: 1000px;
+  background-color: beige;
+}
+
+.content.t {
+  width: 768px;
+  height: 1000px;
+  background-color: bisque;
+}
+
+.content.m {
+  width: 100%;
+  height: 1000px;
+  background-color: gold;
+}
+
+.boxWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+.boxWrapper.pc {
+  justify-content: space-between;
+}
+
+.boxWrapper.t {
+  justify-content: center;
+}
+
+.boxWrapper.m {
+  justify-content: center;
+}
+
+.box {
+  width: 632px;
+  height: 317px;
+  border-radius: 14px;
+  background-color: white;
+  margin-bottom: 14px;
+}
+
+.box.pc {
+  width: 632px;
+  height: 317px;
+}
+
+.box.t {
+  width: 530px;
+  height: 265px;
+}
+
+.box.m {
+  width: 498px;
+  height: 249px;
 }
