@@ -6,6 +6,10 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors : {
+      container : "black",
+      font : "white",
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -14,10 +18,12 @@ module.exports = {
       },
     },
     screen: {
-      sm: "465px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1640px",
+      // sm: "465px",
+      // md: "768px",
+      // lg: "1024px",
+      // xl: "1640px",
+      sm: "768px",
+      lg: "1280px"
     },
   },
   plugins: [],

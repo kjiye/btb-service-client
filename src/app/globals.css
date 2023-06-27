@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 라이트모드이자 기본 값으로 적용할 스타일을 정의 */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
+/* 다크모드에 적용할 스타일을 정의 */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -16,17 +18,28 @@
   }
 }
 
+/* 폰트 정의 */
 @font-face {
   font-family: "kosugi";
   src: url("../../public/font/Kosugi-Regular.ttf");
 }
 
+/* 전체 태그에 적용할 기본 공통 속성 */
 * {
+  padding: 0;
+  margin: 0;
   font-family: "kosugi";
+  font-size: 15px;
+  background-color: "black";
+  color: "white";
 }
+
+
+
 
 body {
   color: white;
+  background-color: black;
 }
 
 .header {
@@ -40,12 +53,9 @@ body {
   color: black;
   text-align: center;
   font-size: 15px;
-}
-
-.content.pc {
+  background-color: beige;
   width: 1280px;
   height: 1000px;
-  background-color: beige;
 }
 
 .content.t {
@@ -65,9 +75,6 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-}
-
-.boxWrapper.pc {
   justify-content: space-between;
 }
 
@@ -85,11 +92,6 @@ body {
   border-radius: 14px;
   background-color: white;
   margin-bottom: 14px;
-}
-
-.box.pc {
-  width: 632px;
-  height: 317px;
 }
 
 .box.t {

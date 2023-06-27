@@ -10,13 +10,14 @@ export default function Page() {
     query: "(min-width:768px) and (max-width:1280px)",
   });
   const isMobile: boolean = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:768px)",
   });
 
   const device = (className: string) => {
-    if (isDesktop) return className + " pc";
+    // if (isDesktop) return className + " pc";
     if (isTablet) return className + " t";
     if (isMobile) return className + " m";
+    return className;
   };
 
   return (

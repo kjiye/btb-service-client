@@ -1,6 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 
+// root 경로인 "/" 에서 실행할 파일
+// 메인페이지로 사용
 export default function Page() {
   const router = useRouter();
 
