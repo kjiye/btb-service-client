@@ -1,4 +1,8 @@
 "use client";
+import Dropdown from "@/component/dropdown";
+import DropdownInnerText from "@/component/dropdown/inner/text";
+import Footer from "@/component/footer";
+import Header from "@/component/header";
 // import { isMobile } from "react-device-detect";
 import { useMediaQuery } from "react-responsive";
 
@@ -14,18 +18,28 @@ export default function Page() {
   });
 
   const device = (className: string) => {
-    // if (isDesktop) return className + " pc";
+    if (isDesktop) return className;
     if (isTablet) return className + " t";
     if (isMobile) return className + " m";
     return className;
   };
 
   return (
-    <div>
-      <h1>반응형 레이아웃 컨텐츠 영역 예시</h1>
-      <div className="header">header</div>
+    <div className={`${device("resContainer")}`}>
+      <Header />
+
+      <div className="mainWrapper">
+        <Dropdown
+          title={"Introduction"}
+          selected={true}
+          child={<DropdownInnerText />}
+        />
+        <Dropdown title={"Map"} selected={false} />
+        <Dropdown title={"NFT shop"} selected={false} />
+      </div>
+      <Footer />
+      {/* 
       <div className={`${device("content")}`}>
-        body (content)
         <div className={`${device("boxWrapper")}`}>
           <div className={`${device("box")}`}></div>
           <div className={`${device("box")}`}></div>
@@ -33,7 +47,7 @@ export default function Page() {
           <div className={`${device("box")}`}></div>
           <div className={`${device("box")}`}></div>
         </div>
-      </div>
+      </div> */}
       {/* 
       {isDesktop && <p style={{ background: "red" }}>Desktop</p>}
       {isTablet && <p style={{ background: "blue" }}>Tablet</p>}
