@@ -3,7 +3,8 @@ import { Clone, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense } from "react";
 
-const Models = [{ title: "3DTest", url: "/P1.glb" }];
+// const Models = [{ title: "3DTest", url: "/P1.glb" }];
+const Models = [{ title: "3DTest", url: "/P10.glb" }];
 
 function Model({ url }: any) {
   const gltf: Record<string, any> = useGLTF(url);
@@ -107,7 +108,10 @@ function Model({ url }: any) {
 
 // const CAMERA_SETTING = { position: [0, 0, -0.2], near: 0.025 };
 // 카메라의 near와 position z축 설정으로 모델이 출력되는 거리를 조정하면 실직적으로 표시되는 크기를 제어할 수 있음
-const CAMERA_SETTING = { position: [-0.3, 0, -0.2], near: 0.02, far: 10 };
+
+// 350 기준
+// const CAMERA_SETTING = { position: [-0.3, -0.05, -0.25], near: 0.02, far: 10 };
+const CAMERA_SETTING = { position: [-0.3, -0.05, -0.25], near: 0.1, far: 10 };
 
 export default function Home() {
   // const { title } = useControls({
@@ -116,37 +120,42 @@ export default function Home() {
   //   },
   // });
   return (
-    <div
-      style={{
-        width: "350px",
-        height: "350px",
-        margin: "20px auto 0",
-        backgroundColor: "black",
-      }}
-    >
-      <Canvas camera={CAMERA_SETTING}>
-        {/* <Environment files="/StudioHDR_2_StarField_01_2K.hdr" background /> */}
-        {/* <Environment files="/workshop_1k.hdr" background /> */}
-        {/* 
+    <div style={{ backgroundColor: "white", padding: "100px" }}>
+      <div
+        style={{
+          width: "1080px",
+          height: "1080px",
+          margin: "20px auto 0",
+          backgroundColor: "black",
+        }}
+      >
+        <Canvas camera={CAMERA_SETTING}>
+          {/* <Environment files="/StudioHDR_2_StarField_01_2K.hdr" background /> */}
+          {/* <Environment files="/workshop_1k.hdr" background /> */}
+          {/* 
         <Environment
           files="https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@useGLTF/public/img/workshop_1k.hdr"
           background
         />
          */}
-        <ambientLight intensity={0.5} />
-        {/* 스팟라이트 빼야 모델이 더 잘 보임 */}
-        {/* <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} /> */}
-        <pointLight position={[2, 2, 0]} />
-        <Suspense>
-          <Model url={Models[0].url} />
-          {/* <Model url={Models[Models.findIndex((m) => m.title === title)].url} /> */}
-        </Suspense>
-        {/* 우측 컨트롤러 */}
-        {/* <OrbitControls autoRotate /> */}
-        <OrbitControls enableDamping={true} />
-        {/* 좌측 상태바 */}
-        {/* <Stats /> */}
-      </Canvas>
+          {/* <ambientLight intensity={0.5} /> */}
+          <ambientLight intensity={1} />
+          {/* 스팟라이트 빼야 모델이 더 잘 보임 */}
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+
+          {/* <pointLight position={[2, 2, 0]} /> */}
+          <pointLight position={[10, 10, 0]} />
+          <Suspense>
+            <Model url={Models[0].url} />
+            {/* <Model url={Models[Models.findIndex((m) => m.title === title)].url} /> */}
+          </Suspense>
+          {/* 우측 컨트롤러 */}
+          {/* <OrbitControls autoRotate /> */}
+          <OrbitControls enableDamping={true} autoRotate />
+          {/* 좌측 상태바 */}
+          {/* <Stats /> */}
+        </Canvas>
+      </div>
     </div>
   );
 }

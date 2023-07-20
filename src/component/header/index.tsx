@@ -1,37 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMediaQuery } from "react-responsive";
 import styles from "./header.module.css";
 
-export default function Header() {
-  const isDesktop: boolean = useMediaQuery({
-    query: "(min-width:1280px)",
-  });
-  const isTablet: boolean = useMediaQuery({
-    query: "(min-width:768px) and (max-width:1280px)",
-  });
-  const isMobile: boolean = useMediaQuery({
-    query: "(max-width:768px)",
-  });
+interface Props {
+  isTabletBelow?: boolean;
+  rsp?: string;
+  lang?: string;
+}
 
-  const device = (className?: string) => {
-    className = className || "";
-    if (isDesktop) return className;
-    if (isTablet) return className + " t";
-    if (isMobile) return className + " m";
-    return className;
-  };
-
+// 다국어 기능 추가하기
+export default function Header({
+  isTabletBelow = false,
+  rsp = "",
+  lang = "en",
+}: Props) {
   return (
-    <header className={`${device()}`}>
-      <div className={styles.flexRowBtw}>
-        <div className={`${styles.btnContainer}`}>
+    <header className={rsp}>
+      <div className={`flexRowBtw`}>
+        <div>
           <Link href="#" className={`${styles.btn}`}>
             Beyond the Birthplace
           </Link>
         </div>
-        {!isMobile ? (
-          <div className={`${styles.btnContainer} ${styles.flexRowBtw}`}>
+        {isTabletBelow ? (
+          <button className={styles.hamburger}>
+            <Image
+              src="/img/icon/icon_hamburger.png"
+              alt={"mobile menu button"}
+              width="40"
+              height="40"
+            />
+          </button>
+        ) : (
+          <div className={`${styles.btnContainer} flexRowBtw`}>
             <button className={`${styles.btn}`}>Log in</button>
             <div className={`${styles.btn}`}>
               <button>EN</button>
@@ -39,15 +40,6 @@ export default function Header() {
               <button>KR</button>
             </div>
           </div>
-        ) : (
-          <button className={styles.hamburger}>
-            <Image
-              src="/img/icon/icon_hamburger.png"
-              alt={"menu"}
-              width="40"
-              height="40"
-            />
-          </button>
         )}
       </div>
     </header>

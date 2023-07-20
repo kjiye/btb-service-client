@@ -19,6 +19,7 @@ export default function DropdownInnerText() {
           purchase them as NFTs.
         </div>
       </div>
+      {/* 준우님 방 모델 출력하기 */}
       <div className={styles.container}>
         <div className={styles.title}>Artist and Creators</div>
         <div>
