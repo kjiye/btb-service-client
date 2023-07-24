@@ -8,3 +8,11 @@
   display: inline-block;
   margin: 10px;
 }
+
+.acitveText {
+  color: white;
+}
+
+.inactiveText {
+  color: #838383;
+}

@@ -21,7 +21,7 @@
   width: calc(100% / 3) px;
   border-radius: 12px;
   cursor: pointer;
-  filter: brightness(65%);
+  filter: brightness(50%);
 }
 
 .img:hover,

@@ -1,0 +1,6 @@
+.contentWrapper {
+  height: 100%;
+  overflow-y: auto;
+  margin-top: 15px;
+  padding-bottom: 15px;
+}

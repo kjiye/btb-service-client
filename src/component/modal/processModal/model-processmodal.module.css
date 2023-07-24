@@ -1,0 +1,17 @@
+.thumbnail {
+  margin: 62px auto 0;
+  width: 400px;
+  height: 400px;
+}
+
+.thumbnail.m {
+  margin: 32px auto 0;
+  width: 216px;
+  height: 216px;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}

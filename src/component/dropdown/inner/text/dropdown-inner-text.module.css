@@ -11,3 +11,12 @@
 .secWrapper {
   margin: 10px 0;
 }
+
+.name {
+  display: block;
+}
+
+.glbWrapper {
+  width: 100%;
+  height: 360px;
+}

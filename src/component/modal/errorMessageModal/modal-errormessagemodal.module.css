@@ -1,0 +1,9 @@
+.bottom {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}
+
+.subMessage {
+  color: #838383;
+}

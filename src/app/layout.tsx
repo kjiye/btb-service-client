@@ -1,8 +1,12 @@
+import { viewCount } from "@/api/fetch";
 import { LangContextProvider } from "@/context/lang.context";
 import "./globals.css";
 
 export const metadata = {
   title: "Beyond the Birthplace",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 /*
@@ -13,6 +17,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // 전체 조회수
+  viewCount(0);
   return (
     <html lang="en">
       <body>

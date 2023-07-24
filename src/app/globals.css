@@ -58,13 +58,10 @@ body {
 header {
   background-color: black;
   position: fixed;
+  z-index: 99;
   width: 1280px;
-  box-shadow: 0 8px 22px -5px rgba(43, 43, 43, 0.7);
+  /* box-shadow: 0 8px 22px -5px rgba(43, 43, 43, 0.7); */
 }
-
-/* header.t {
-  width: 768px;
-} */
 
 header.m {
   width: 100%;
@@ -75,29 +72,18 @@ footer {
   background-color: black;
   position: fixed;
   bottom: 0;
-  box-shadow: 0px -10px 22px -5px rgba(43, 43, 43, 0.7);
+  /* box-shadow: 0px -10px 22px -5px rgba(43, 43, 43, 0.7); */
   width: 1280px;
 }
 
 footer.m {
   width: 100%;
+  margin-top: 100px;
   position: unset;
   box-shadow: none;
 }
 
-/* 반응형 컨텐츠 영역 */
-.resContainer {
-  width: 1280px;
-  margin: 0 auto;
-  position: relative;
-}
-.resContainer.m {
-  width: 100%;
-}
-
-/* 임시 풋터 */
 .footerWrapper {
-  background: gray;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -117,13 +103,44 @@ footer.m {
   padding: 12px 0;
 }
 
+/* 반응형 컨텐츠 영역 */
+.resContainer {
+  width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+.resContainer.m {
+  width: 100%;
+}
+
 /* 메인 드롭다운 래퍼 */
 .mainWrapper {
   width: 100%;
   padding: 64px 0;
 }
 
-/* 수정 진행 */
+.mainWrapper.m {
+  padding: 64px 15px 0;
+}
+
+/* 메인 사용자 정보 (PC) */
+.userWrapper {
+  position: absolute;
+  right: 14px;
+  width: 269px;
+  z-index: 9;
+}
+
+.userWrapper span {
+  display: inline-block;
+}
+
+.userBtn {
+  cursor: pointer;
+  float: right;
+}
+
+/* 수정 진행 - 걷어내야 하는 속성들 */
 .content {
   margin: 0 auto;
   color: black;

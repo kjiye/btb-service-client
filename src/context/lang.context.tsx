@@ -1,5 +1,6 @@
 "use client";
 import React, { Dispatch, createContext, useReducer } from "react";
+import { Web3ContextProvider } from "./web3.context";
 
 type StateType = {
   lang: string;
@@ -35,7 +36,7 @@ export const LangContextProvider = ({
 
   return (
     <LangContext.Provider value={{ state, dispatch }}>
-      {children}
+      <Web3ContextProvider>{children}</Web3ContextProvider>
     </LangContext.Provider>
   );
 };

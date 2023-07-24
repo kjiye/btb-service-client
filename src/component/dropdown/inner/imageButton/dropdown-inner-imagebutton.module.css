@@ -2,6 +2,10 @@
 .container {
   padding: 10px 0;
 }
+.thumbnail {
+  margin-top: 6px;
+  cursor: pointer;
+}
 
 .cateItem {
   display: inline-block;
