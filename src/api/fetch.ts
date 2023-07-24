@@ -9,6 +9,10 @@ export const viewCount = async (id: number) => {
   return !!res.success;
 };
 
+export const termsContent = async (type: "terms" | "privacy", lang: string) => {
+  return await getRequest(`/terms/${type}/${lang}`);
+};
+
 export const checkSigned = async (walletAddr: string) => {
   const res = await getRequest(`/check/signed/${walletAddr}`);
   if (res.success && res.data?.signed) {

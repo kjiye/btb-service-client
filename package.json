@@ -36,5 +36,8 @@
     "three": "^0.153.0",
     "typescript": "5.1.3",
     "web3": "^4.0.3"
+  },
+  "devDependencies": {
+    "webpack-node-externals": "^3.0.0"
   }
 }

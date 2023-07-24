@@ -73,7 +73,6 @@ export default function Page() {
       title: "NFT Shop",
       child: (
         <DropdownImageButtonList
-          // 구매할 번호 받아서 처리하는거 추가
           onConnectWallet={() => {
             connectWallet();
           }}
@@ -151,7 +150,9 @@ export default function Page() {
           const openUrl = isTabletBelow
             ? process.env.NEXT_PUBLIC_METAMASK_DEEPLINK
             : process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD;
-          window.open(openUrl);
+          if (typeof window !== "undefined") {
+            window.open(openUrl);
+          }
         }, 1000);
       } else if (error instanceof UnsupportedChainIdError) {
         // 미지원 네트워크 연결 상태
@@ -236,26 +237,30 @@ export default function Page() {
   // 지갑 신규 연결 감지
   useEffect(() => {
     if (active && account && !isWalletConnected) {
-      console.log("새로 연결한 것으로 간주");
       checkSignedAPI(account);
     }
   }, [active, account]);
+
+  // 마운트 테스트
+  const [mounted, setMounted] = useState<boolean>(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // 구매 가능여부 확인 후 컨트랙 콜
   // 컨트랙 콜 결과 전송
   const checkEtherReady = async (data: any) => {
     const { nft, price, id } = data;
     const checkResult = await etherReady(id);
-    console.log(checkResult); // 이 안에 주문번호 있음
     if (checkResult.success) {
       const { orderId, orderNumber } = checkResult.data;
-      // 화면을 막는 모달 처리 먼저 진행
-      setIsShowNft(false); // 상세페이지 열려있는 경우를 위해서
+      setIsShowNft(false); // 상세페이지가 열려있는 경우를 위해 false처리
+      !nftDetail && setNftDetail(data);
       setProcessModalType("process");
       setIsShowProcess(true);
       const callResult = await callMintNft(nft.tokenUri, String(price));
       if (!callResult.success) {
-        etherResult(orderId, "N");
+        await etherResult(orderId, "N");
         setIsShowProcess(false);
         setErrorMessage({
           message: callResult?.code?.includes("INSUFFICIENT")
@@ -265,7 +270,7 @@ export default function Page() {
         });
         setIsShowMsgError(true);
       } else {
-        etherResult(orderId, "Y", {
+        await etherResult(orderId, "Y", {
           txHash: callResult?.transactionHash,
           tokenId: Number(callResult.tokenId),
         });
@@ -273,9 +278,7 @@ export default function Page() {
         setIsShowProcess(true);
       }
       // router.refresh();
-      window.location.reload();
     } else {
-      console.log(checkEtherReady);
       // 에러페이지 보여주기
       setIsShowNft(false);
       setErrorMessage({
@@ -286,144 +289,150 @@ export default function Page() {
     }
   };
 
-  return (
-    <>
-      <TermsModal
-        rsp={rsp}
-        isShow={isShowTerms}
-        selected={selectedTerms}
-        onCloseClick={() => {
-          setIsShowTerms(false);
-        }}
-      />
-      <ProcessModal
-        rsp={rsp}
-        lang={lang}
-        isShow={isShowProcess}
-        data={nftDetail}
-        type={processModalType}
-        onCloseClick={() => setIsShowProcess(false)}
-      />
+  if (mounted) {
+    return (
+      <>
+        <TermsModal
+          rsp={rsp}
+          isShow={isShowTerms}
+          selected={selectedTerms}
+          onCloseClick={() => {
+            setIsShowTerms(false);
+          }}
+        />
+        <ProcessModal
+          rsp={rsp}
+          lang={lang}
+          isShow={isShowProcess}
+          data={nftDetail}
+          type={processModalType}
+          onCloseClick={() => setIsShowProcess(false)}
+        />
 
-      <NftDetailModal
-        rsp={rsp}
-        lang={lang}
-        isShow={isShowNft}
-        onCloseClick={() => setIsShowNft(false)}
-        onConnectWallet={() => connectWallet()}
-        onBuyClick={(data: any) => checkEtherReady(data)}
-        data={nftDetail}
-      />
-      <UserInfoModal
-        rsp={rsp}
-        isShow={isShowJoin}
-        account={account}
-        sign={joinSign}
-        onSubmitError={() => loginErrorModal()}
-        onSubmitSuccess={() => setIsShowJoin(false)}
-        onCloseClick={() => {
-          disconnectWallet();
-          setIsShowJoin(false);
-          setErrorMessage({
-            message: textObj.wallet.inputUserError.msg[lang],
-            subMessage: textObj.wallet.inputUserError.sub[lang],
-          });
-          setIsShowMsgError(true);
-        }}
-      />
-      {isShowMsgError && (
-        <ErrorMessageModal
+        <NftDetailModal
           rsp={rsp}
-          isShow={isShowMsgError}
-          message={errorMessage.message}
-          subMessage={errorMessage.subMessage}
-          onCloseClick={() => {
-            setIsShowMsgError(false);
-            setErrorMessage({});
-          }}
-        />
-      )}
-      {isTabletBelow && (
-        <DrawerMenu
-          active={isWalletConnected}
           lang={lang}
-          dropdownList={dropdownList}
-          onSelected={(selected: number) => onSelectDropdown(selected)}
-          isShowDrawer={isShowDrawer}
-          onCloseClick={() => {
-            setIsShowDrawer(false);
-          }}
-          onLoginClick={() => connectWallet()}
-          onLogoutClick={() => disconnectWallet()}
+          isShow={isShowNft}
+          onCloseClick={() => setIsShowNft(false)}
+          onConnectWallet={() => connectWallet()}
+          onBuyClick={(data: any) => checkEtherReady(data)}
+          data={nftDetail}
         />
-      )}
-      <div className={`resContainer ${rsp}`}>
-        <Header
-          active={isWalletConnected}
-          // active={!!(sessionStorage?.getItem("isWalletConnected") === "true")}
+        <UserInfoModal
           rsp={rsp}
-          isTabletBelow={isTabletBelow}
-          lang={lang}
-          onMenuClick={() => {
-            setIsShowDrawer(true);
+          isShow={isShowJoin}
+          account={account}
+          sign={joinSign}
+          onSubmitError={() => loginErrorModal()}
+          onSubmitSuccess={() => setIsShowJoin(false)}
+          onCloseClick={() => {
+            disconnectWallet();
+            setIsShowJoin(false);
+            setErrorMessage({
+              message: textObj.wallet.inputUserError.msg[lang],
+              subMessage: textObj.wallet.inputUserError.sub[lang],
+            });
+            setIsShowMsgError(true);
           }}
-          onLoginClick={() => connectWallet()}
         />
-        <div className={`mainWrapper ${rsp}`}>
-          {/* PC 지갑 연결 상태일 시 표시 아이콘 */}
-          {!isTabletBelow && isWalletConnected && (
-            <div className={`userWrapper`}>
-              <span
-                className={`userBtn`}
-                onClick={() => setIsShowUser(!isShowUser)}
-              >
-                <Image
-                  src="/img/icon/icon_user.png"
-                  alt="user"
-                  width={30}
-                  height={30}
-                />
-              </span>
-              {isShowUser && (
-                <span className={`userInfo`}>
-                  {/* 한번 더 펼침 여부 확인해야함 */}
-                  <User />
-                  <RoundedSingleButton
-                    name={textObj.common.button.logout[lang]}
-                    onClick={() => disconnectWallet()}
-                  />
-                </span>
-              )}
-            </div>
-          )}
-          {isTabletBelow
-            ? !isShowDrawer && (
-                <div>{dropdownList.find((v) => !!v.selected)?.child}</div>
-              )
-            : dropdownList.map((v) => (
-                <Dropdown
-                  key={v.id}
-                  id={v.id}
-                  title={v.title}
-                  selected={...v.selected}
-                  onSelected={(selected: number) => onSelectDropdown(selected)}
-                  child={v.child}
-                  rsp={rsp}
-                  isTabletBelow={isTabletBelow}
-                />
-              ))}
-        </div>
-        {!isTabletBelow && (
-          <Footer
+        {isShowMsgError && (
+          <ErrorMessageModal
             rsp={rsp}
-            isTabletBelow={isTabletBelow}
-            onSelectTerms={(selected: "terms" | "privacy") => {
-              setSelectedTerms(selected);
-              setIsShowTerms(true);
+            isShow={isShowMsgError}
+            message={errorMessage.message}
+            subMessage={errorMessage.subMessage}
+            onCloseClick={() => {
+              setIsShowMsgError(false);
+              setErrorMessage({});
             }}
           />
         )}
-      </div>
-    </>
-  );
+        {isTabletBelow && (
+          <DrawerMenu
+            active={isWalletConnected}
+            lang={lang}
+            dropdownList={dropdownList}
+            onSelected={(selected: number) => onSelectDropdown(selected)}
+            isShowDrawer={isShowDrawer}
+            onCloseClick={() => {
+              setIsShowDrawer(false);
+            }}
+            onLoginClick={() => connectWallet()}
+            onLogoutClick={() => disconnectWallet()}
+          />
+        )}
+        <div className={`resContainer ${rsp}`}>
+          <Header
+            active={isWalletConnected}
+            // active={!!(sessionStorage?.getItem("isWalletConnected") === "true")}
+            rsp={rsp}
+            isTabletBelow={isTabletBelow}
+            lang={lang}
+            onMenuClick={() => {
+              setIsShowDrawer(true);
+            }}
+            onLoginClick={() => connectWallet()}
+          />
+          <div className={`mainWrapper ${rsp}`}>
+            {/* PC 지갑 연결 상태일 시 표시 아이콘 */}
+            {!isTabletBelow && isWalletConnected && (
+              <div className={`userWrapper`}>
+                <span
+                  className={`userBtn`}
+                  onClick={() => setIsShowUser(!isShowUser)}
+                >
+                  <Image
+                    src="/img/icon/icon_user.png"
+                    alt="user"
+                    width={30}
+                    height={30}
+                  />
+                </span>
+                {isShowUser && (
+                  <span className={`userInfo`}>
+                    {/* 한번 더 펼침 여부 확인해야함 */}
+                    <User />
+                    <RoundedSingleButton
+                      name={textObj.common.button.logout[lang]}
+                      onClick={() => disconnectWallet()}
+                    />
+                  </span>
+                )}
+              </div>
+            )}
+            {isTabletBelow
+              ? !isShowDrawer && (
+                  <div>{dropdownList.find((v) => !!v.selected)?.child}</div>
+                )
+              : dropdownList.map((v) => (
+                  <Dropdown
+                    key={v.id}
+                    id={v.id}
+                    title={v.title}
+                    selected={...v.selected}
+                    onSelected={(selected: number) =>
+                      onSelectDropdown(selected)
+                    }
+                    child={v.child}
+                    rsp={rsp}
+                    isTabletBelow={isTabletBelow}
+                  />
+                ))}
+          </div>
+          {!isTabletBelow && (
+            <Footer
+              rsp={rsp}
+              isTabletBelow={isTabletBelow}
+              onSelectTerms={(selected: "terms" | "privacy") => {
+                setSelectedTerms(selected);
+                setIsShowTerms(true);
+              }}
+            />
+          )}
+        </div>
+      </>
+    );
+  } else {
+    <div>로딩중</div>;
+  }
 }

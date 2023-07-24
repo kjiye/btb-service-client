@@ -15,8 +15,8 @@
         "kr": "이용약관"
       },
       "content": {
-        "en": "Terms of Use...",
-        "kr": "이용약관..."
+        "en": "",
+        "kr": ""
       }
     },
     "privacy": {
@@ -25,8 +25,8 @@
         "kr": "개인정보보호정책"
       },
       "content": {
-        "en": "Privacy Policy...",
-        "kr": "개인정보보호정책..."
+        "en": "",
+        "kr": ""
       }
     }
   },
@@ -73,7 +73,7 @@
         "kr": "지갑 연결 실패"
       },
       "sub": {
-        "en": "Please connect your wallet and enter information",
+        "en": "Please connect your wallet and enter information.",
         "kr": "지갑 연결 후 회원정보를 입력해 주세요."
       }
     }
@@ -85,7 +85,7 @@
     },
     "content": {
       "en": "'Beyond the Birthplace' is a project that expands upon 'Birthplace 2020', a project by the sculptor Goyoson who has crafted intricate sculptures using solely discarded or overlooked items found in a room and presented them online. In this expanded project, the artist will craft physical sculptures from various materials located in his room, transform them into 3D model digital files (glb), and display them as NFTs. 'Beyond the Birthplace' provides users with the opportunity to assemble digital sculptures by selecting and arranging pieces scattered throughout the artist's variously themed virtual spaces. When you purchase the NFT of a desired sculpture, you also acquire the actual sculpture itself, and vice versa - if you purchase the physical sculpture, you will receive its corresponding NFT.",
-      "kr": "‘Beyond the Birthplace’는 조각가 고요손이 방 안에 오래 방치된 혹은 버려진 것들을 재료 삼아 작은 조각을 만들고 이를 웹상에서 이미지로 선보였던 ‘Birthplace 2020’의 확장판이다. 이번 프로젝트에서는 ‘Birthplace 2020’와 동일하게 작가가 자신의 방 안에서 찾은 여러 재료로 실물 작품을 제작하고, 이를 3d 모델 디지털 파일(glb)로 변환하여 NFT로 선보인다. 원하는 조각 작품의 NFT를 구매할 시, NFT와 함께 실제 조각 작품을 수령하게 되며 반대로 실제 조각 작품을 구매할 시, 해당 작품의 NFT를 수령할 수 있다. 또한 해당 웹상에서 사용자는 작가가 설정한 다양한 주제의 가상 공간(맵)을 통해 각 공간에 놓인 디지털 조각들을 자유롭게 배치하며 감상할 수 있다. "
+      "kr": "‘Beyond the Birthplace’는 조각가 고요손이 방 안에 오래 방치된 혹은 버려진 것들을 재료 삼아 작은 조각을 만들고 이를 웹상에서 이미지로 선보였던 ‘Birthplace 2020’의 확장판이다. 이번 프로젝트에서는 ‘Birthplace 2020’와 동일하게 작가가 자신의 방 안에서 찾은 여러 재료로 제작한 실물 작품을 3d 모델 디지털 파일(glb)로 변환하여 NFT로 선보인다. 원하는 조각 작품의 NFT를 구매할 시, NFT와 함께 실제 조각 작품을 수령하게 되며 반대로 실제 조각 작품을 구매할 시, 해당 작품의 NFT를 수령할 수 있다. 또한 사용자는 해당 웹상에서 작가가 설정한 다양한 주제의 가상 공간 맵을 통해 각 공간에 놓인 디지털 조각들을 자유롭게 배치하며 감상할 수 있다."
     }
   },
   "creators": {
@@ -223,7 +223,7 @@
         "kr": "결제 진행 중"
       },
       "sub": {
-        "en": "Processing will be completed shortly. Thank you for your patience",
+        "en": "Processing will be completed shortly. Thank you for your patience.",
         "kr": "처리가 완료될 때까지, 잠시만 기다려 주세요."
       }
     },

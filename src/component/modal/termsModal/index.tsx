@@ -2,7 +2,9 @@ import Modal from "@/component/modal";
 import styles from "./modal-termsmodal.module.css";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { termsContent } from "@/api/fetch";
+import TermsContent from "./content";
 
 interface Props {
   rsp?: string;
@@ -21,11 +23,25 @@ export default function TermsModal({
   const {
     state: { lang },
   } = useContext(LangContext);
+
+  const [content, setContent] = useState<string>("");
+
+  const getData = async (type: "terms" | "privacy", lang: string) => {
+    const res = await termsContent(type, lang);
+    res.success && res.data && setContent(res.data?.content);
+  };
+
+  useEffect(() => {
+    getData(selected, lang);
+  }, [selected, lang]);
+
   return (
     <Modal rsp={rsp} isShow={isShow} onCloseClick={onCloseClick}>
       <div>{textObj.footer[selected].title[lang]}</div>
       <div className={styles.contentWrapper}>
-        <div>{textObj.footer[selected].content[lang]}</div>
+        <div>
+          <TermsContent selected={selected} />
+        </div>
       </div>
     </Modal>
   );

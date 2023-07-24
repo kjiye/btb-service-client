@@ -2,6 +2,7 @@
 import { nftList } from "@/api/fetch";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import { checkIsWalletConnected } from "@/util/session.util";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from "./dropdown-inner-imagebutton.module.css";
 
@@ -75,7 +76,7 @@ export default function DropdownImageButtonList({
           const isAvailable = v.soldEdition < v.totalEdition;
           return (
             <div key={i.toString()} className={styles.itemWrapper}>
-              <div>{`${v.title} / ${v.year} / Price: ${v.price} ETH / Type: ${v.fileExtension} / Dimension: ${v.Dimension} / Description: ${v.description}`}</div>
+              <div>{`${v.title} / ${v.year} / Price: ${v.price} ETH / Type: ${v.fileExtension} / Dimension: ${v.Dimension} / File Size: ${v.fileSize} / Description: ${v.description}`}</div>
               <img
                 className={styles.thumbnail}
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${v.thumbnailFilePath}${v.thumbnailFilename}`}

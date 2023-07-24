@@ -11,7 +11,7 @@ import { checkIsWalletConnected, getUserSession } from "@/util/session.util";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
 
-const CAMERA_SETTING = { position: [0, 0, -0.26], near: 0.1, far: 10 };
+const CAMERA_SETTING = { position: [0, 0, -0.3], near: 0.1, far: 10 };
 
 interface Props {
   rsp?: string;
@@ -41,13 +41,8 @@ export default function NftDetailModal({
   const [isConnected, setIsConnected] = useState<boolean>(!!getUserSession());
   const [isShowDownload, setIsShowDownload] = useState<boolean>(false);
 
-  // 디테일 새 정보 한번 더 당겨오기
-  // 공통 : glb, 작품 정보
-  // 판매 완료 시 : etherscan, owner, soldout 표시
-  // 판매 전일 시 : 구매하기 버튼 추가
   const getData = async (artworkId: number, checkUser: boolean) => {
     const recentData = await nftDetail(artworkId);
-    //.nft.id
     if (checkUser) {
       const res = await getUserInfo();
       if (res.success && res?.data?.nftOrder && res.data.nftOrder.length > 0) {

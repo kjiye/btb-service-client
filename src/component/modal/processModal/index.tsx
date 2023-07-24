@@ -56,7 +56,9 @@ export default function ProcessModal({
               <RoundedSingleButton
                 name={"OK"}
                 disabled={false}
-                onClick={() => onCloseClick()}
+                onClick={() => {
+                  typeof window !== "undefined" && window.location.reload();
+                }}
               />
             </div>
           </>

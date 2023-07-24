@@ -25,7 +25,11 @@ export default function Footer({
         <li className={`footerItem ${rsp}`}>
           (C) 2023. birthplace/goyoson all rights reserved.
         </li>
-        <li className={`footerItem ${rsp}`}>btb.goyoson@gmail.com</li>
+        <li className={`footerItem ${rsp} ${styles.click}`}>
+          <Link href={"mailto:beyondthebirthplace.kr@gmail.com"}>
+            beyondthebirthplace.kr@gmail.com
+          </Link>
+        </li>
         {/* <li className={`footerItem ${rsp}`}>beyondthebirthplace.kr</li> */}
         <li className={`footerItem ${rsp}`}>
           <Link href="https://www.instagram.com/birthplace_goyoson/">
