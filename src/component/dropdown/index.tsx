@@ -20,7 +20,6 @@ export default function Dropdown({
   isTabletBelow = false,
   onSelected,
 }: Props) {
-  console.log("selected", selected);
   return (
     <>
       <div className={`${styles.container} ${rsp === "m" && styles.m}`}>

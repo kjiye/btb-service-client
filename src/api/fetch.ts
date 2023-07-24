@@ -17,10 +17,8 @@ export const termsContent = async (type: "terms" | "privacy", lang: string) => {
 export const checkSigned = async (walletAddr: string) => {
   const res = await getRequest(`/check/signed/${walletAddr}`);
   if (res.success && res.data?.signed) {
-    console.log("서명 완료");
     return true;
   } else {
-    console.log("서명 없음");
     return false;
   }
 };
@@ -28,10 +26,8 @@ export const checkSigned = async (walletAddr: string) => {
 export const checkUserInfo = async (walletAddr: string) => {
   const res = await getRequest(`/check/info/${walletAddr}`);
   if (res.success && res.data?.hasInfo) {
-    console.log("정보 등록");
     return true;
   } else {
-    console.log("정보 미등록");
     return false;
   }
 };

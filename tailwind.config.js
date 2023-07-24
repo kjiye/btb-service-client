@@ -1,14 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    // "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    // "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors : {
-      container : "black",
-      font : "white",
+    colors: {
+      container: "black",
+      font: "white",
     },
     extend: {
       backgroundImage: {
@@ -18,12 +18,8 @@ module.exports = {
       },
     },
     screen: {
-      // sm: "465px",
-      // md: "768px",
-      // lg: "1024px",
-      // xl: "1640px",
       sm: "768px",
-      lg: "1280px"
+      lg: "1280px",
     },
   },
   plugins: [],

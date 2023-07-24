@@ -15,26 +15,20 @@ export const injected = new InjectedConnector({
 // 컨트랙 콜
 export const callMintNft = async (tokenUri: string, price: string) => {
   const walletAddr = await getUserSession()?.account;
-  // const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const provider = new ethers.providers.Web3Provider(
     window.ethereum,
     // process.env.NEXT_PUBLIC_CHAINID
-    "sepolia"
+    "sepolia" // 메인넷 배포 때 주석처리
   );
   const signer = provider.getSigner(walletAddr);
-  // 개발 테스트용 고얼리 스마트 컨트랙
   const contract = new ethers.Contract(
     process.env.NEXT_PUBLIC_CONTRACT_ADDR!,
     ContractABI,
     signer
   );
 
-  console.log(price);
-  ethers.utils.parseEther(price);
-
   // 컨트랙 콜
-  // // { value: ethers.utils.parseEther(sendValue), gasLimit: 200000 }
   try {
     const transaction = await contract.mintNFT(
       tokenUri, // nft token

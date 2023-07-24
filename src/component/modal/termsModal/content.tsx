@@ -1853,7 +1853,7 @@ export default function TermsContent({ selected }: Props) {
 
           <p>- 소속: Beyond the Birthplace</p>
 
-          <p>- 메일: beyondthebirthplace.co.kr</p>
+          <p>- 메일: beyondthebirthplace.kr@gmail.com</p>
 
           <p>제10조 (권익침해 구제 방법)</p>
 

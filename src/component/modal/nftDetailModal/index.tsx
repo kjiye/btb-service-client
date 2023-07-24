@@ -76,8 +76,6 @@ export default function NftDetailModal({
 
   useEffect(() => {
     if (data?.id) {
-      console.log("....");
-      console.log(data);
       getData(data.id, isConnected);
     }
   }, [data?.id, isConnected]);

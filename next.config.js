@@ -26,6 +26,7 @@ module.exports = nextConfig;
 */
 
 const nextConfig = {
+  // output: "export",
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -40,6 +41,19 @@ const nextConfig = {
 
 module.exports = {
   ...nextConfig,
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "upgrade-insecure-requests",
+          },
+        ],
+      },
+    ];
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.externals.push({
       "utf-8-validate": "commonjs utf-8-validate",
