@@ -433,6 +433,6 @@ export default function Page() {
       </>
     );
   } else {
-    <div>로딩중</div>;
+    <div>loading..</div>;
   }
 }
