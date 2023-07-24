@@ -10,8 +10,14 @@ import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import { checkIsWalletConnected, getUserSession } from "@/util/session.util";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
+import * as THREE from "three";
 
-const CAMERA_SETTING = { position: [0, 0, -0.3], near: 0.1, far: 10 };
+// const CAMERA_SETTING = { position: [0, 0, -0.3], near: 0.1, far: 10 };
+const CAMERA_SETTING = {
+  position: new THREE.Vector3(0, 0, -0.3),
+  near: 0.1,
+  far: 10,
+};
 
 interface Props {
   rsp?: string;

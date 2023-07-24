@@ -5,8 +5,14 @@ import { Suspense, useContext } from "react";
 import ModelRender from "./model";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import * as THREE from "three";
 
-const CAMERA_SETTING = { position: [1.9, -0.01, -0.8], near: 0.1, far: 10 };
+// const CAMERA_SETTING = { position: [1.9, 0, -0.8], near: 0.1, far: 10 };
+const CAMERA_SETTING = {
+  position: new THREE.Vector3(1.9, -0.01, 0.8),
+  near: 0.1,
+  far: 10,
+};
 
 export default function DropdownInnerText() {
   const textObj = Object(text);
