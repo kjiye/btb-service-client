@@ -694,8 +694,8 @@ export default function TermsContent({ selected }: Props) {
           </p>
 
           <p>
-            4. &quot;NFT'란 대체 불가능한 토큰(NON-FUNGIBLE TOKEN)으로서, (I)
-            이미지, 동영상, 음악, 서적 등의 &quot;디지털 저작물&quot;에 대한
+            4. &quot;NFT&apos;란 대체 불가능한 토큰(NON-FUNGIBLE TOKEN)으로서,
+            (I) 이미지, 동영상, 음악, 서적 등의 &quot;디지털 저작물&quot;에 대한
             메타데이터 정보를 포함한 상태로 발행되어, (II) 해당 NFT 소유자에게
             상기 &quot;디지털 저작물&quot;에 관한 특정 권리 (이하 &quot;NFT
             소유자의 권리&quot;)가 부여되는 블록체인 기반의 디지털 자산을
