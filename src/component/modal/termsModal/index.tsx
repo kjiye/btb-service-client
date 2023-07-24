@@ -24,17 +24,6 @@ export default function TermsModal({
     state: { lang },
   } = useContext(LangContext);
 
-  const [content, setContent] = useState<string>("");
-
-  const getData = async (type: "terms" | "privacy", lang: string) => {
-    const res = await termsContent(type, lang);
-    res.success && res.data && setContent(res.data?.content);
-  };
-
-  useEffect(() => {
-    getData(selected, lang);
-  }, [selected, lang]);
-
   return (
     <Modal rsp={rsp} isShow={isShow} onCloseClick={onCloseClick}>
       <div>{textObj.footer[selected].title[lang]}</div>

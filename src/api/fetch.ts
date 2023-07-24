@@ -9,6 +9,7 @@ export const viewCount = async (id: number) => {
   return !!res.success;
 };
 
+// 미사용
 export const termsContent = async (type: "terms" | "privacy", lang: string) => {
   return await getRequest(`/terms/${type}/${lang}`);
 };
