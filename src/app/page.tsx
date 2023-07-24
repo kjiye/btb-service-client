@@ -151,7 +151,6 @@ export default function Page() {
           const openUrl = isTabletBelow
             ? process.env.NEXT_PUBLIC_METAMASK_DEEPLINK
             : process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD;
-          console.log(openUrl);
           window.open(openUrl);
         }, 1000);
       } else if (error instanceof UnsupportedChainIdError) {
