@@ -9,7 +9,8 @@ export const SEPOLIA_CHAINID = 11155111;
 
 // 지갑 설정
 export const injected = new InjectedConnector({
-  supportedChainIds: [MAINNET_CHAINID, SEPOLIA_CHAINID],
+  // supportedChainIds: [MAINNET_CHAINID, SEPOLIA_CHAINID], // 테스트용
+  supportedChainIds: [MAINNET_CHAINID],
 });
 
 // 컨트랙 콜
@@ -17,9 +18,9 @@ export const callMintNft = async (tokenUri: string, price: string) => {
   const walletAddr = await getUserSession()?.account;
 
   const provider = new ethers.providers.Web3Provider(
-    window.ethereum,
+    window.ethereum
     // process.env.NEXT_PUBLIC_CHAINID
-    "sepolia" // 메인넷 배포 때 주석처리
+    // "sepolia" // 메인넷 배포 때 주석처리
   );
   const signer = provider.getSigner(walletAddr);
   const contract = new ethers.Contract(
