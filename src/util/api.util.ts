@@ -11,11 +11,10 @@ export const getRequest = async (path: string, param?: any) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       return false;
     });
 };
@@ -49,11 +48,10 @@ export const postRequest = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       return false;
     });
 };
@@ -70,11 +68,10 @@ export const putRequest = async (path: string, param: any) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       return false;
     });
 };

@@ -955,7 +955,7 @@
   "resolved" "https://registry.npmjs.org/@types/stats.js/-/stats.js-0.17.0.tgz"
   "version" "0.17.0"
 
-"@types/three@>=0.144.0":
+"@types/three@^0.154.0", "@types/three@>=0.144.0":
   "integrity" "sha512-IioqpGhch6FdLDh4zazRn3rXHj6Vn2nVOziJdXVbJFi9CaI65LtP9qqUtpzbsHK2Ezlox8NtsLNHSw3AQzucjA=="
   "resolved" "https://registry.npmjs.org/@types/three/-/three-0.154.0.tgz"
   "version" "0.154.0"

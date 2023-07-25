@@ -38,6 +38,7 @@
     "web3": "^4.0.3"
   },
   "devDependencies": {
+    "@types/three": "^0.154.0",
     "webpack-node-externals": "^3.0.0"
   }
 }
