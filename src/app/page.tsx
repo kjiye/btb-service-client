@@ -263,9 +263,10 @@ export default function Page() {
         await etherResult(orderId, "N");
         setIsShowProcess(false);
         setErrorMessage({
-          message: callResult?.code?.includes("INSUFFICIENT")
-            ? textObj.wallet.balanceError.msg[lang]
-            : textObj.wallet.txCommonError.msg[lang],
+          message:
+            callResult?.code && callResult?.code?.includes("INSUFFICIENT")
+              ? textObj.wallet.balanceError.msg[lang]
+              : textObj.wallet.txCommonError.msg[lang],
           subMessage: textObj.wallet.balanceError.sub[lang],
         });
         setIsShowMsgError(true);

@@ -38,8 +38,8 @@ export const callMintNft = async (tokenUri: string, price: string) => {
       false,
       {
         value: ethers.utils.parseEther(price),
-        gasLimit: Number(process.env.NEXT_PUBLIC_GASLIMIT),
-      } // 실제 지불 가격
+        // gasLimit: Number(process.env.NEXT_PUBLIC_GASLIMIT),  // 세폴리아 때만 사용하기
+      }
     );
 
     const result = await transaction.wait();
