@@ -151,7 +151,8 @@ export default function Page() {
             ? process.env.NEXT_PUBLIC_METAMASK_DEEPLINK
             : process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD;
           if (typeof window !== "undefined") {
-            window.open(openUrl);
+            // window.open(openUrl);
+            window.location.href=`${openUrl}`;
           }
         }, 1000);
       } else if (error instanceof UnsupportedChainIdError) {
@@ -224,10 +225,10 @@ export default function Page() {
           data: { accessToken, id },
         } = loginResult;
         await setUserSession(accessToken.token, account, id);
-        console.log("기존 회원 재로그인 성공!");
+        // console.log("기존 회원 재로그인 성공!");
         router.refresh();
       } else {
-        console.log("로그인 에러");
+        // console.log("로그인 에러");
         disconnectWallet();
         loginErrorModal();
       }

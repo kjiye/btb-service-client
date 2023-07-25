@@ -22,8 +22,9 @@ export default function DrodownImageCardList() {
 
   const updateViewCount = async (mapId: number, url: string) => {
     await viewCount(mapId);
-    if (url) {
-      window.open(url);
+    if (url && typeof window !== "undefined") {
+      // window.open(url);
+      window.location.href = `${url}`;
     }
     return;
   };
