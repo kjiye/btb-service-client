@@ -31,9 +31,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "54.249.51.124",
-        port: "4555",
+        protocol: "https",
+        hostname: "test.artemeta.art",
       },
     ],
   },
