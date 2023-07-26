@@ -87,16 +87,19 @@ export default function DropdownImageButtonList({
                   onSelectNft(v);
                 }}
               />
-              {/* 지갑이 연결되어 있으면서 내 구매 내역과 일치할 때는 GLB DOWNLOAD 버튼 */}
               <RoundedSingleButton
                 name={isAvailable ? "BUY" : "SOLD OUT"}
                 disabled={!isAvailable}
                 onClick={() => {
+                  // 여기서 바로 구매로직 호출하지 않고 상세 모달을 띄우기
+                  /*
                   if (checkIsWalletConnected()) {
                     onBuyClick(v);
                   } else {
                     onConnectWallet();
                   }
+                  */
+                  onBuyClick(v);
                 }}
               />
             </div>

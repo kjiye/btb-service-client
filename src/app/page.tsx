@@ -80,7 +80,12 @@ export default function Page() {
             setNftDetail(data);
             setIsShowNft(true);
           }}
-          onBuyClick={(data: any) => checkEtherReady(data)}
+          // 상세 모달 호출하기
+          // onBuyClick={(data: any) => checkEtherReady(data)}
+          onBuyClick={(data: any) => {
+            setNftDetail(data);
+            setIsShowNft(true);
+          }}
         />
       ),
     },
@@ -152,7 +157,7 @@ export default function Page() {
             : process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD;
           if (typeof window !== "undefined") {
             // window.open(openUrl);
-            window.location.href=`${openUrl}`;
+            window.location.href = `${openUrl}`;
           }
         }, 1000);
       } else if (error instanceof UnsupportedChainIdError) {
