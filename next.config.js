@@ -32,7 +32,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "test.artemeta.art",
+        hostname: "https://kim3203dev.store",
       },
     ],
   },
