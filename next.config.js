@@ -1,29 +1,4 @@
 /** @type {import('next').NextConfig} */
-/*
-const nextConfig = {
-  // experimental: {
-  //   serverActions: true,
-  // },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "4000",
-      },
-    ],
-  },
-  webpack: (config, { isServer }) => {
-    // eslint-disable-next-line space-before-blocks
-    if (isServer) {
-      config.externals = nodeExternals();
-    }
-
-    return config;
-  },
-};
-module.exports = nextConfig;
-*/
 
 const nextConfig = {
   // output: "export",
@@ -32,7 +7,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "https://kim3203dev.store",
+        hostname: process.env.NEXT_PUBLIC_API_SERVER_URL.replace(
+          "/service",
+          ""
+        ),
       },
     ],
   },
