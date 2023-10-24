@@ -1,15 +1,18 @@
 /* 메인화면 드롭다운 introduction 내부 컴포넌트 스타일 */
+$secondary_color: #838383;
+$gap_size: 10px;
+
 .container {
-  padding: 10px 0;
+  padding: $gap_size 0;
 }
 .title {
-  color: #838383;
+  color: $secondary_color;
 }
 .content {
-  margin-top: 10px;
+  margin-top: $gap_size;
 }
 .secWrapper {
-  margin: 10px 0;
+  margin: $gap_size 0;
 }
 
 .name {

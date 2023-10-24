@@ -1,7 +1,7 @@
 import { Clone, useGLTF } from "@react-three/drei";
 
 interface Props {
-  url: any;
+  url: string;
 }
 
 export default function ModelRender({ url }: Props) {

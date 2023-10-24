@@ -1,19 +1,21 @@
 import { LangContext } from "@/context/lang.context";
+import { DeviceType, ICON_SIZE_LARGE, LanguageType } from "@/model/props";
+import { textBundle } from "@/util/format.util";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
-import styles from "./header.module.css";
+import React, { useContext } from "react";
+import styles from "./header.module.scss";
+// import text from "../../text.json";
 
 interface Props {
   active: boolean;
   isTabletBelow?: boolean;
-  rsp?: string;
-  lang?: string;
-  onMenuClick: () => void;
-  onLoginClick: () => void;
+  rsp?: DeviceType;
+  lang?: LanguageType;
+  onMenuClick: (event?: React.MouseEvent<HTMLElement>) => void;
+  onLoginClick: (event?: React.MouseEvent<HTMLElement>) => void;
 }
 
-// 다국어 기능 추가하기
 export default function Header({
   active,
   isTabletBelow = false,
@@ -24,12 +26,16 @@ export default function Header({
 }: Props) {
   const { dispatch } = useContext(LangContext);
 
+  const text = textBundle();
+  const en = text.util.language.title.en;
+  const kr = text.util.language.title.kr;
+
   return (
-    <header className={rsp}>
+    <header className={`${styles.headerContainer} ${styles[rsp]}`}>
       <div className={`flexRowBtw`}>
         <div>
           <Link href="/" className={`${styles.btn}`}>
-            Beyond the Birthplace
+            {text.logo.title}
           </Link>
         </div>
         <>
@@ -38,42 +44,46 @@ export default function Header({
               <Image
                 src="/img/icon/icon_hamburger.png"
                 alt={"mobile menu button"}
-                width="40"
-                height="40"
+                width={ICON_SIZE_LARGE}
+                height={ICON_SIZE_LARGE}
               />
             </button>
           ) : (
             <div className={`${styles.btnContainer} flexRowBtw`}>
-              {/* 지갑 연결이 되어있을 땐 표시되지 않는다 */}
+              {/* 지갑이 연동된 상태일 때는 표시되지 않음 */}
               {!active && (
                 <button
                   className={`${styles.btn}`}
                   onClick={() => onLoginClick()}
                 >
-                  Log in
+                  {text.util.login.title}
                 </button>
               )}
               <div className={`${styles.btn}`}>
                 <button
                   className={`${
-                    lang === "en" ? styles.activeText : styles.inactiveText
+                    lang === en.toLowerCase()
+                      ? styles.activeText
+                      : styles.inactiveText
                   }`}
                   onClick={() => {
-                    dispatch({ type: "en" });
+                    dispatch({ type: en.toLowerCase() });
                   }}
                 >
-                  EN
+                  {en}
                 </button>
                 <span> / </span>
                 <button
                   className={`${
-                    lang === "kr" ? styles.activeText : styles.inactiveText
+                    lang === kr.toLowerCase()
+                      ? styles.activeText
+                      : styles.inactiveText
                   }`}
                   onClick={() => {
-                    dispatch({ type: "kr" });
+                    dispatch({ type: kr.toLowerCase() });
                   }}
                 >
-                  KR
+                  {kr}
                 </button>
               </div>
             </div>

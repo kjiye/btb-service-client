@@ -1,17 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import styles from "./model-processmodal.module.css";
+import styles from "./model-processmodal.module.scss";
 import Modal from "@/component/modal";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
 import { useContext } from "react";
+import { IMAGE_SIZE } from "@/model/props";
 
 interface Props {
   rsp?: string;
   lang?: string;
   isShow?: boolean;
   data?: any;
-  type: "process" | "done";
+  type: ProcessModalType;
   onCloseClick: () => void;
 }
 
@@ -37,8 +38,8 @@ export default function ProcessModal({
               className={`${styles.thumbnail} ${rsp === "m" && styles.m}`}
               src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${data.thumbnailFilePath}${data.thumbnailFilename}`}
               alt={data.title}
-              width={216}
-              height={216}
+              width={IMAGE_SIZE}
+              height={IMAGE_SIZE}
             />
           </>
         ) : (
@@ -49,8 +50,8 @@ export default function ProcessModal({
               className={`${styles.thumbnail} ${rsp === "m" && styles.m}`}
               src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${data.thumbnailFilePath}${data.thumbnailFilename}`}
               alt={data.title}
-              width={216}
-              height={216}
+              width={IMAGE_SIZE}
+              height={IMAGE_SIZE}
             />
             <div className={`${styles.bottom}`}>
               <RoundedSingleButton

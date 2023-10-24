@@ -6,16 +6,17 @@ import RoundedSingleButton from "../button/roundedSingleButton";
 import User from "../user";
 import styles from "./drawer.module.css";
 import text from "../../text.json";
+import { DropdownItem, ICON_SIZE_SMALL, LanguageType } from "@/model/props";
 
 interface Props {
   active: boolean;
-  lang: string;
-  dropdownList: any[];
+  lang: LanguageType;
+  dropdownList: DropdownItem[];
   onSelected: (selected: number) => void;
   isShowDrawer: boolean;
-  onCloseClick: () => void;
-  onLoginClick: () => void;
-  onLogoutClick: () => void;
+  onCloseClick: (event?: React.MouseEvent<HTMLElement>) => void;
+  onLoginClick: (event?: React.MouseEvent<HTMLElement>) => void;
+  onLogoutClick: (event?: React.MouseEvent<HTMLElement>) => void;
 }
 
 export default function DrawerMenu({
@@ -30,23 +31,27 @@ export default function DrawerMenu({
 }: Props) {
   const { dispatch } = useContext(LangContext);
   const [isShowUser, setIsShowUser] = useState<boolean>(false);
+
   const textObj = Object(text);
+  const en = textObj.util.language.title.en;
+  const enSml = en.toLowerCase();
+  const kr = textObj.util.language.title.kr;
+  const krSml = kr.toLowerCase();
 
   return (
     <div className={`${styles.wrapper} ${!isShowDrawer && styles.hide}`}>
-      {/* close */}
       <div className={styles.close} onClick={onCloseClick}>
         <Image
           src="/img/icon/icon_close.png"
-          alt="close"
-          width={30}
-          height={30}
+          alt="close icon"
+          width={ICON_SIZE_SMALL}
+          height={ICON_SIZE_SMALL}
         />
       </div>
       <div>
-        <Link href="/">Beyond the Birthplace</Link>
+        <Link href="/">{textObj.logo.title}</Link>
       </div>
-      {dropdownList.map((v) => (
+      {dropdownList.map((v: DropdownItem) => (
         <div
           key={v.id}
           className={`${styles.menu}`}
@@ -57,24 +62,24 @@ export default function DrawerMenu({
       ))}
       {!active && (
         <div className={`${styles.menu}`} onClick={() => onLoginClick()}>
-          Log in
+          {textObj.util.login.title}
         </div>
       )}
       <div
         className={`${styles.menu} ${
-          lang === "en" ? styles.activeText : styles.inactiveText
+          lang === enSml ? styles.activeText : styles.inactiveText
         }`}
-        onClick={() => dispatch({ type: "en" })}
+        onClick={() => dispatch({ type: enSml })}
       >
-        EN
+        {en}
       </div>
       <div
         className={`${styles.menu} ${
-          lang === "kr" ? styles.activeText : styles.inactiveText
+          lang === krSml ? styles.activeText : styles.inactiveText
         }`}
-        onClick={() => dispatch({ type: "kr" })}
+        onClick={() => dispatch({ type: krSml })}
       >
-        KR
+        {kr}
       </div>
       {active && (
         <>
@@ -84,9 +89,9 @@ export default function DrawerMenu({
           >
             <Image
               src="/img/icon/icon_user.png"
-              alt="user"
-              width={30}
-              height={30}
+              alt="user information icon"
+              width={ICON_SIZE_SMALL}
+              height={ICON_SIZE_SMALL}
             />
           </div>
           {isShowUser && (

@@ -1,0 +1,16 @@
+.textWrapper {
+  padding: 1em;
+}
+
+.dimmedWrapper {
+  position: fixed;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #fff, $alpha: 0.3);
+  text-align: center;
+}
+
+.icon {
+  margin: 20% 0;
+}

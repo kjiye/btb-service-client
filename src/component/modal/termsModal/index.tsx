@@ -2,14 +2,14 @@ import Modal from "@/component/modal";
 import styles from "./modal-termsmodal.module.css";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
-import { useContext, useEffect, useState } from "react";
-import { termsContent } from "@/api/fetch";
+import { useContext } from "react";
 import TermsContent from "./content";
+import { SelectTermsType } from "@/model/props";
 
 interface Props {
   rsp?: string;
   isShow?: boolean;
-  selected: "terms" | "privacy";
+  selected: SelectTermsType;
   onCloseClick: () => void;
 }
 

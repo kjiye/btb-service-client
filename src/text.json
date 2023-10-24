@@ -1,4 +1,7 @@
 {
+  "logo": {
+    "title": "Beyond the Birthplace"
+  },
   "sign": {
     "en": "Please sign this message to prove you have access to this wallet and we'll log you in."
   },
@@ -7,6 +10,10 @@
       "title": {
         "en": "Instagram",
         "kr": "인스타그램"
+      },
+      "content": {
+        "en": "https://www.instagram.com/birthplace_goyoson/",
+        "kr": "https://www.instagram.com/birthplace_goyoson/"
       }
     },
     "terms": {
@@ -27,6 +34,18 @@
       "content": {
         "en": "",
         "kr": ""
+      }
+    },
+    "copyright": {
+      "content": {
+        "en": "(C) 2023. birthplace/goyoson all rights reserved.",
+        "kr": "(C) 2023. birthplace/goyoson all rights reserved."
+      }
+    },
+    "email": {
+      "content": {
+        "en": "beyondthebirthplace.kr@gmail.com",
+        "kr": "beyondthebirthplace.kr@gmail.com"
       }
     }
   },
@@ -213,10 +232,38 @@
       "glbDownload": {
         "en": "GLB DOWNLOAD",
         "kr": "GLB 원본파일 다운로드"
+      },
+      "buy": {
+        "en": "BUY",
+        "kr": "BUY"
+      },
+      "soldout": {
+        "en": "SOLD OUT",
+        "kr": "SOLD OUT"
+      },
+      "ok": {
+        "en": "OK",
+        "kr": "OK"
+      }
+    },
+    "msg": {
+      "loading": {
+        "en": "loading...",
+        "kr": "loading..."
+      },
+      "soldout": {
+        "en": "SOLD OUT",
+        "kr": "SOLD OUT"
       }
     }
   },
   "payment": {
+    "confirm": {
+      "msg": {
+        "en": "Would you like to purchase the artwork?",
+        "kr": "작품을 구매하시겠습니까?"
+      }
+    },
     "process": {
       "msg": {
         "en": "Payment in progress",
@@ -230,6 +277,32 @@
     "complete": {
       "en": "Purchase complete",
       "kr": "구매 완료"
+    }
+  },
+  "product": {
+    "price": {
+      "en": "Price",
+      "kr": "Price"
+    },
+    "priceUnit": {
+      "en": "ETH",
+      "kr": "ETH"
+    },
+    "type": {
+      "en": "Type",
+      "kr": "Type"
+    },
+    "dimension": {
+      "en": "Dimension",
+      "kr": "Dimension"
+    },
+    "fileSize": {
+      "en": "File Size",
+      "kr": "File Size"
+    },
+    "description": {
+      "en": "Description",
+      "kr": "Description"
     }
   },
   "map": {
@@ -252,6 +325,28 @@
     "lava": {
       "en": "TBC",
       "kr": "화산"
+    }
+  },
+  "dropdown": {
+    "introduction": {
+      "title": "Introduction"
+    },
+    "map": {
+      "title": "Map"
+    },
+    "shop": {
+      "title": "NFT Shop"
+    }
+  },
+  "util": {
+    "login": {
+      "title": "Log in"
+    },
+    "language": {
+      "title": {
+        "en": "EN",
+        "kr": "KR"
+      }
     }
   }
 }

@@ -11,6 +11,7 @@ import { checkIsWalletConnected, getUserSession } from "@/util/session.util";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
 import * as THREE from "three";
+import { NftItem } from "@/model/api";
 
 // const CAMERA_SETTING = { position: [0, 0, -0.3], near: 0.1, far: 10 };
 const CAMERA_SETTING = {
@@ -25,7 +26,7 @@ interface Props {
   isShow?: boolean;
   onCloseClick: () => void;
   onConnectWallet: () => void;
-  onBuyClick: (data: any) => void;
+  onBuyClick: (data: NftItem) => void;
   data?: any;
 }
 
@@ -86,21 +87,18 @@ export default function NftDetailModal({
         <>
           {isAvailable ? (
             <div className={styles.status}>
-              Would you like to purchase the artwork?
+              {textObj.payment.confirm.msg[lang]}
             </div>
           ) : (
-            <div className={styles.status}>SOLD OUT</div>
+            <div className={styles.status}>
+              {textObj.common.msg.soldout[lang]}
+            </div>
           )}
-          {/* sold out 중에서 구매가 완료된 내역에 한하여 (tokenId있는거) etherscan url 표시 */}
-          <div>{`${data.title} / ${data.year} / Price: ${data.price} ETH / Type: ${data.fileExtension} / Dimension: ${data.Dimension} / Description: ${data.description}`}</div>
-          {/* glb render */}
-          <div className={`${styles.modelWrapper} ${rsp === "m" && styles.m}`}>
+          <div>{`${data.title} / ${data.year} / ${textObj.product.price[lang]}: ${data.price} ${textObj.product.priceUnit[lang]} / ${textObj.product.type[lang]}: ${data.fileExtension} / ${textObj.product.dimension[lang]}: ${data.Dimension} /  ${textObj.product.dimension[lang]}: ${data.description}`}</div>
+          <div className={`${styles.modelWrapper} ${styles[rsp]}`}>
             <Canvas camera={CAMERA_SETTING}>
-              {/* <ambientLight intensity={0.5} /> */}
               <ambientLight intensity={1} />
-              {/* 스팟라이트 빼야 모델이 더 잘 보임 */}
               <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-              {/* <pointLight position={[2, 2, 0]} /> */}
               <pointLight position={[10, 10, 0]} />
               <Suspense>
                 <ModelRender
@@ -112,32 +110,26 @@ export default function NftDetailModal({
                 />
               </Suspense>
               <OrbitControls enableDamping={true} />
-              {/* <Stats /> */}
             </Canvas>
             <div className={`${styles.bottom}`}>
-              {/* 지갑이 연결되어 있으면서 내 구매내역과 일치할 때는 원본파일 다운로드 */}
               <RoundedSingleButton
                 name={
                   isAvailable
                     ? `${textObj.common.button.confirmPurchase[lang]}`
                     : isShowDownload
                     ? `${textObj.common.button.glbDownload[lang]}`
-                    : "SOLD OUT"
+                    : `${textObj.common.button.soldout[lang]}`
                 }
-                // 여기 수정
                 disabled={!isAvailable && !isShowDownload}
-                onClick={async () => {
+                onClick={() => {
                   if (!isAvailable && isShowDownload) {
                     window.open(
                       `${process.env.NEXT_PUBLIC_IMAGE_URL}${data.originFilePath}${data.originFilename}`
                     );
                   } else {
-                    if (checkIsWalletConnected()) {
-                      onBuyClick(data);
-                    } else {
-                      // 지갑 연결 선택 모달 띄우기
-                      onConnectWallet();
-                    }
+                    checkIsWalletConnected()
+                      ? onBuyClick(data)
+                      : onConnectWallet();
                   }
                 }}
               />
@@ -145,7 +137,7 @@ export default function NftDetailModal({
           </div>
         </>
       ) : (
-        <div>loading...</div>
+        <div>{textObj.common.msg.loading[lang]}</div>
       )}
     </Modal>
   );

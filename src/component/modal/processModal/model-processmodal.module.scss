@@ -1,13 +1,16 @@
+$thumbnail_size: 400px;
+$image_size: 216px;
+
 .thumbnail {
   margin: 62px auto 0;
-  width: 400px;
-  height: 400px;
+  width: $thumbnail_size;
+  height: $thumbnail_size;
 }
 
 .thumbnail.m {
   margin: 32px auto 0;
-  width: 216px;
-  height: 216px;
+  width: $image_size;
+  height: $image_size;
 }
 
 .bottom {

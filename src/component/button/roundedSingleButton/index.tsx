@@ -1,13 +1,11 @@
-import styles from "./roundedsinglebutton.module.css";
-
-// 활성, 비활성 상태
-// width는 100%인 버전과 269px/ 48px 고정 버전 두 개로 쓰임
+import { RoundedSingleButtonType } from "@/model/props";
+import styles from "./roundedsinglebutton.module.scss";
 
 interface Props {
   name: string;
-  type?: "fixed" | "responsive";
+  type?: RoundedSingleButtonType;
   disabled?: boolean;
-  onClick: () => void;
+  onClick: (event?: React.MouseEvent<HTMLElement>) => void;
 }
 
 export default function RoundedSingleButton({

@@ -3,14 +3,18 @@ module.exports = {
   content: [
     // "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     // "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    // "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/component/**/*.{ts,tsx}",
   ],
   theme: {
-    colors: {
-      container: "black",
-      font: "white",
-    },
     extend: {
+      colors: {},
+      width: {
+        icon: 21,
+      },
+      height: {
+        icon: 21,
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

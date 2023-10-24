@@ -28,12 +28,18 @@ export const checkIsWalletConnected = () => {
     typeof window !== "undefined"
       ? sessionStorage?.getItem("isWalletConnected")
       : null;
-  return getResult && getResult === "true" ? true : false;
+  // return getResult && getResult === "true" ? true : false;
+  return !!(getResult && getResult === "true");
 };
 
 export const getUserSession = () => {
+  const origin =
+    typeof window !== "undefined" && sessionStorage.getItem("user");
+  return origin ? JSON.parse(origin) : undefined;
+  /*
   if (typeof window !== "undefined") {
     const origin = sessionStorage.getItem("user");
     return origin ? JSON.parse(origin) : undefined;
   }
+  */
 };

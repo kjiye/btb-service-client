@@ -1,31 +1,35 @@
 /* eslint-disable @next/next/no-img-element */
 import { nftList } from "@/api/fetch";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
-import { checkIsWalletConnected } from "@/util/session.util";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import styles from "./dropdown-inner-imagebutton.module.css";
+import React, { useContext, useEffect, useState } from "react";
+import styles from "./dropdown-inner-imagebutton.module.scss";
+import text from "../../../../text.json";
+import { LangContext } from "@/context/lang.context";
+import {
+  IMAGE_SIZE,
+  ProductCategoryDatasets,
+  ProductCategoryItem,
+} from "@/model/props";
+import { NftItem } from "@/model/api";
 
 interface Props {
   onSelectNft: (data: any) => void;
-  onConnectWallet: () => void;
-  onBuyClick: (data: any) => void;
 }
 
-export default function DropdownImageButtonList({
-  onSelectNft,
-  onConnectWallet,
-  onBuyClick,
-}: Props) {
-  const [categoryList, setCategoryList] = useState<any[]>([
-    { id: 1, title: "ALL", selected: true },
-    { id: 2, title: "2023", selected: false },
-  ]);
-  const [nftDisplayList, setNftDisplayList] = useState<any[]>([]);
+export default function DropdownImageButtonList({ onSelectNft }: Props) {
+  const textObj = Object(text);
+  const {
+    state: { lang },
+  } = useContext(LangContext);
+
+  const [categoryList, setCategoryList] = useState<ProductCategoryItem[]>(
+    ProductCategoryDatasets
+  );
+  const [nftDisplayList, setNftDisplayList] = useState<NftItem[]>([]);
 
   const onChangeCategory = async (selected: number) => {
     setCategoryList(
-      categoryList.map((v) => {
+      categoryList.map((v: ProductCategoryItem) => {
         return {
           ...v,
           selected: v.id === selected ? !v.selected : false,
@@ -35,7 +39,10 @@ export default function DropdownImageButtonList({
   };
 
   const getList = async () => {
-    const getResult = await nftList(categoryList.find((v) => v.selected)?.id);
+    const getResult = await nftList(
+      categoryList.find((v: ProductCategoryItem) => v.selected)?.id ||
+        ProductCategoryDatasets[0].id
+    );
     // 지갑 연결 시 내 정보 매칭도 추가
     if (getResult.success && getResult.data) {
       const {
@@ -56,7 +63,7 @@ export default function DropdownImageButtonList({
     <div className={styles.container}>
       {/* 가로 카테고리 리스트 */}
       <div className={`flexRow`}>
-        {categoryList.map((v) => (
+        {categoryList.map((v: ProductCategoryItem) => (
           <span
             key={v.id}
             className={`${styles.cateItem} ${
@@ -72,41 +79,33 @@ export default function DropdownImageButtonList({
       </div>
       {/* 카테고리 하단 리스트 */}
       {nftDisplayList.length > 0 ? (
-        nftDisplayList.map((v, i) => {
+        nftDisplayList.map((v: NftItem, i) => {
           const isAvailable = v.soldEdition < v.totalEdition;
           return (
             <div key={i.toString()} className={styles.itemWrapper}>
-              <div>{`${v.title} / ${v.year} / Price: ${v.price} ETH / Type: ${v.fileExtension} / Dimension: ${v.Dimension} / File Size: ${v.fileSize} / Description: ${v.description}`}</div>
+              <div>{`${v.title} / ${v.year} / ${textObj.product.price[lang]}: ${v.price} ${textObj.product.priceUnit[lang]} / ${textObj.product.type[lang]}: ${v.fileExtension} / ${textObj.product.dimension[lang]}: ${v.Dimension} / ${textObj.product.fileSize[lang]}: ${v.fileSize} / ${textObj.product.description[lang]}: ${v.description}`}</div>
               <img
                 className={styles.thumbnail}
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${v.thumbnailFilePath}${v.thumbnailFilename}`}
                 alt={v.title}
-                width={216}
-                height={216}
-                onClick={() => {
-                  onSelectNft(v);
-                }}
+                width={IMAGE_SIZE}
+                height={IMAGE_SIZE}
+                onClick={() => onSelectNft(v)}
               />
               <RoundedSingleButton
-                name={isAvailable ? "BUY" : "SOLD OUT"}
+                name={
+                  isAvailable
+                    ? textObj.common.button.buy[lang]
+                    : textObj.common.button.soldout[lang]
+                }
                 disabled={!isAvailable}
-                onClick={() => {
-                  // 여기서 바로 구매로직 호출하지 않고 상세 모달을 띄우기
-                  /*
-                  if (checkIsWalletConnected()) {
-                    onBuyClick(v);
-                  } else {
-                    onConnectWallet();
-                  }
-                  */
-                  onBuyClick(v);
-                }}
+                onClick={() => onSelectNft(v)}
               />
             </div>
           );
         })
       ) : (
-        <div>loading...</div>
+        <div>{textObj.common.msg.loading[lang]}</div>
       )}
     </div>
   );

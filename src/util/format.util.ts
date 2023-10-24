@@ -1,3 +1,5 @@
+import text from "../text.json";
+
 export const checkTextFormat = (type: string, value: string) => {
   switch (type) {
     case "email":
@@ -17,6 +19,10 @@ export const textEllipsis = (text: string) => {
     text = text.substring(0, length - 2) + "...";
   }
   return text;
+};
+
+export const textBundle = () => {
+  return Object(text);
 };
 
 export const modelScaleMatch = (artworkId: number) => {

@@ -1,43 +1,38 @@
 import { LangContext } from "@/context/lang.context";
+import { SelectTermsType } from "@/model/props";
 import Link from "next/link";
 import { useContext } from "react";
 import text from "../../text.json";
-import styles from "./footer.module.css";
+import styles from "./footer.module.scss";
 
 interface Props {
-  isTabletBelow?: boolean;
   rsp?: string;
-  onSelectTerms: (selected: "terms" | "privacy") => void;
+  onSelectTerms: (selected: SelectTermsType) => void;
 }
 
-export default function Footer({
-  isTabletBelow = false,
-  rsp = "",
-  onSelectTerms,
-}: Props) {
+export default function Footer({ rsp = "", onSelectTerms }: Props) {
   const textObj = Object(text);
   const {
     state: { lang },
   } = useContext(LangContext);
   return (
-    <footer className={rsp}>
-      <ul className={`footerWrapper ${rsp}`}>
-        <li className={`footerItem ${rsp}`}>
-          (C) 2023. birthplace/goyoson all rights reserved.
+    <footer className={`${styles.footerContainer} ${styles[rsp]}`}>
+      <ul className={`${styles.footerWrapper} ${styles[rsp]}`}>
+        <li className={`${styles[rsp]}`}>
+          {textObj.footer.copyright.content[lang]}
         </li>
-        <li className={`footerItem ${rsp} ${styles.click}`}>
-          <Link href={"mailto:beyondthebirthplace.kr@gmail.com"}>
-            beyondthebirthplace.kr@gmail.com
+        <li className={`${styles[rsp]} ${styles.clickable}`}>
+          <Link href={`mailto:${textObj.footer.email.content[lang]}`}>
+            {textObj.footer.email.content[lang]}
           </Link>
         </li>
-        {/* <li className={`footerItem ${rsp}`}>beyondthebirthplace.kr</li> */}
-        <li className={`footerItem ${rsp}`}>
-          <Link href="https://www.instagram.com/birthplace_goyoson/">
+        <li className={`${styles[rsp]}`}>
+          <Link href={`${textObj.footer.instagram.content[lang]}`}>
             {textObj.footer.instagram.title[lang]}
           </Link>
         </li>
         <li
-          className={`footerItem ${rsp} ${styles.click}`}
+          className={`${styles[rsp]} ${styles.clickable}`}
           onClick={() => {
             onSelectTerms("terms");
           }}
@@ -45,7 +40,7 @@ export default function Footer({
           {textObj.footer.terms.title[lang]}
         </li>
         <li
-          className={`footerItem ${rsp} ${styles.click}`}
+          className={`${styles[rsp]} ${styles.clickable}`}
           onClick={() => {
             onSelectTerms("privacy");
           }}

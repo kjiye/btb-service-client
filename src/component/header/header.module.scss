@@ -1,0 +1,32 @@
+/* 헤더 내부 특정 스타일 */
+$pc_width: 1280px;
+$primary_color: #000000;
+$secondary_color: #838383;
+
+.headerContainer {
+  background-color: $primary_color;
+  position: fixed;
+  z-index: 99;
+  width: $pc_width;
+  &.m {
+    width: 100%;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px;
+}
+
+.hamburger {
+  display: inline-block;
+  margin: 10px;
+}
+
+.acitveText {
+  color: white;
+}
+
+.inactiveText {
+  color: $secondary_color;
+}

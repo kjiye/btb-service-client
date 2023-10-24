@@ -17,17 +17,16 @@
   position: relative;
 }
 
-.img {
-  width: calc(100% / 3) px;
+.image {
+  width: 100%;
   border-radius: 12px;
   cursor: pointer;
   filter: brightness(50%);
-}
-
-.img:hover,
-.img:hover + .name {
-  color: transparent !important;
-  filter: brightness(110%);
+  &:hover,
+  &:hover + .name {
+    color: transparent !important;
+    filter: brightness(110%);
+  }
 }
 
 .name {

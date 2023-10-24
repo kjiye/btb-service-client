@@ -1,16 +1,16 @@
 "use client";
+import { LanguageType } from "@/model/props";
 import React, { Dispatch, createContext, useReducer } from "react";
 import { Web3ContextProvider } from "./web3.context";
 
 type StateType = {
-  lang: string;
+  lang: LanguageType;
 };
 
 type ActionType = {
-  type: "en" | "kr";
+  type: LanguageType;
 };
 
-// 초기 언어 설정
 const initialState: StateType = {
   lang: "en",
 };
@@ -33,7 +33,6 @@ export const LangContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <LangContext.Provider value={{ state, dispatch }}>
       <Web3ContextProvider>{children}</Web3ContextProvider>

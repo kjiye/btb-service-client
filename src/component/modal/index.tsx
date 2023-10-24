@@ -1,11 +1,11 @@
 // dimmed 처리된 화면 + 모달 팝업 세트로 구성
+import { ICON_SIZE_TINY } from "@/model/props";
 import Image from "next/image";
-import styles from "./modal.module.css";
+import styles from "./modal.module.scss";
 
 interface Props {
   isShow?: boolean;
   rsp?: string;
-  lang?: "en" | "kr";
   children?: React.ReactNode;
   useClose?: boolean;
   onCloseClick?: () => void;
@@ -14,29 +14,23 @@ interface Props {
 export default function Modal({
   isShow = true,
   rsp = "",
-  lang = "en",
   children,
   useClose = true,
   onCloseClick,
 }: Props) {
   return isShow ? (
     <div className={styles.dimmed}>
-      {/* 모바일 상황 테스트 */}
-      <div className={`${styles.modalWrapper} ${rsp === "m" && styles.m}`}>
+      <div className={`${styles.modalWrapper} ${styles[rsp]}`}>
         {useClose && (
           <div
             className={`${styles.close}`}
-            onClick={() => {
-              if (onCloseClick) {
-                onCloseClick();
-              }
-            }}
+            onClick={() => onCloseClick && onCloseClick()}
           >
             <Image
               src="/img/icon/icon_close.png"
-              alt="close"
-              width={21}
-              height={21}
+              alt="close icon"
+              width={ICON_SIZE_TINY}
+              height={ICON_SIZE_TINY}
             />
           </div>
         )}

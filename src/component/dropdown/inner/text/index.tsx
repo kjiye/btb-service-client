@@ -1,4 +1,4 @@
-import styles from "./dropdown-inner-text.module.css";
+import styles from "./dropdown-inner-text.module.scss";
 import text from "../../../../text.json";
 import { LangContext } from "@/context/lang.context";
 import { Suspense, useContext } from "react";
@@ -7,7 +7,6 @@ import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 
-// const CAMERA_SETTING = { position: [1.9, 0, -0.8], near: 0.1, far: 10 };
 const CAMERA_SETTING = {
   position: new THREE.Vector3(1.9, -0.01, -0.8),
   near: 0.1,
@@ -38,7 +37,7 @@ export default function DropdownInnerText() {
         </Canvas>
       </div>
       <div className={styles.container}>
-        <div className={styles.title}>Artist and Creators</div>
+        <div className={styles.title}>{textObj.creators.title[lang]}</div>
         <div>
           <p className={styles.secWrapper}>
             <span className={styles.name}>
