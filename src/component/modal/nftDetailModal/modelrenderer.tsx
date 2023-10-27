@@ -5,7 +5,7 @@ interface Props {
   scale: number;
 }
 
-export default function ModelRender({ url, scale }: Props) {
+export default function ModelRenderer({ url, scale }: Props) {
   const gltf: Record<string, any> = useGLTF(url);
   return (
     <Clone

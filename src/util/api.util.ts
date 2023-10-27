@@ -10,18 +10,13 @@ export const getRequest = async (path: string, param?: any) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((error) => {
-      // console.log(error);
-      return false;
-    });
+    .then((data) => data)
+    .catch((error) => false);
 };
 
 export const postRequest = async (
   path: string,
-  param: any,
+  param: Record<string, any>,
   useToken?: boolean
 ) => {
   const url = process.env.NEXT_PUBLIC_API_SERVER_URL + path;
@@ -47,13 +42,8 @@ export const postRequest = async (
     body: JSON.stringify(param),
   })
     .then((response) => response.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((error) => {
-      // console.log(error);
-      return false;
-    });
+    .then((data) => data)
+    .catch(() => false);
 };
 
 export const putRequest = async (path: string, param: any) => {
@@ -67,11 +57,6 @@ export const putRequest = async (path: string, param: any) => {
     body: JSON.stringify(param),
   })
     .then((response) => response.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((error) => {
-      // console.log(error);
-      return false;
-    });
+    .then((data) => data)
+    .catch(() => false);
 };

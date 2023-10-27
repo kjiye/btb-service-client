@@ -3,6 +3,7 @@ import {
   DeviceType,
   DropdownItem,
   ErrorMessageItem,
+  ErrorMessageType,
   ICON_SIZE_SMALL,
   LanguageType,
   ProcessModalType,
@@ -15,6 +16,7 @@ import Footer from "@/component/footer";
 import Header from "@/component/header";
 import Image from "next/image";
 import ErrorMessageModal from "@/component/modal/errorMessageModal";
+// import NftDetailModal from "@/component/modal/nftDetailModal";
 import NftDetailModal from "@/component/modal/nftDetailModal";
 import ProcessModal from "@/component/modal/processModal";
 import TermsModal from "@/component/modal/termsModal";
@@ -34,16 +36,18 @@ interface Props {
   isShowNft: boolean;
   setIsShowNft: (isShow: boolean) => void;
   connectWallet: () => void;
-  checkEtherReady: (data: NftItem) => void;
   isShowJoin: boolean;
   account?: string | null;
   joinSign?: string;
   loginErrorModal: () => void;
   setIsShowJoin: (isShow: boolean) => void;
   disconnectWallet: () => void;
-  setErrorMessage: (message: ErrorMessageItem) => void;
-  setIsShowMsgError: (isShow: boolean) => void;
+  // setErrorMessage: (message: ErrorMessageItem) => void;
+  // setIsShowMsgError: (isShow: boolean) => void;
+  onChangeErrorMessage: (type?: ErrorMessageType) => void;
   isShowMsgError: boolean;
+  onChangeProcessModal: (type?: ProcessModalType) => void;
+
   errorMessage: ErrorMessageItem;
   isWalletConnected: boolean;
   dropdownList: DropdownItem[];
@@ -71,16 +75,17 @@ export default function PagePresenter({
   isShowNft,
   setIsShowNft,
   connectWallet,
-  checkEtherReady,
   isShowJoin,
   account,
   joinSign,
   loginErrorModal,
   setIsShowJoin,
   disconnectWallet,
-  setErrorMessage,
-  setIsShowMsgError,
+  // setErrorMessage,
+  // setIsShowMsgError,
+  onChangeErrorMessage,
   isShowMsgError,
+  onChangeProcessModal,
   errorMessage,
   isWalletConnected,
   dropdownList,
@@ -94,6 +99,8 @@ export default function PagePresenter({
   setSelectedTerms,
   text,
 }: Props) {
+  console.log("=========");
+  console.log(isShowMsgError);
   return (
     <>
       <TermsModal
@@ -113,6 +120,7 @@ export default function PagePresenter({
         onCloseClick={() => setIsShowProcess(false)}
       />
 
+      {/* 
       <NftDetailModal
         rsp={rsp}
         lang={lang}
@@ -121,6 +129,15 @@ export default function PagePresenter({
         onConnectWallet={() => connectWallet()}
         onBuyClick={(data: NftItem) => checkEtherReady(data)}
         data={nftDetail}
+      /> 
+      */}
+      <NftDetailModal
+        rsp={rsp}
+        onChangeErrorMessage={onChangeErrorMessage}
+        isShow={isShowNft}
+        setIsShowNft={setIsShowNft}
+        selectedData={nftDetail}
+        onChangeProcessModal={onChangeProcessModal}
       />
       <UserInfoModal
         rsp={rsp}
@@ -132,11 +149,14 @@ export default function PagePresenter({
         onCloseClick={() => {
           disconnectWallet();
           setIsShowJoin(false);
+          /*
           setErrorMessage({
             message: text.wallet.inputUserError.msg[lang],
             subMessage: text.wallet.inputUserError.sub[lang],
           });
           setIsShowMsgError(true);
+          */
+          onChangeErrorMessage("inputUserError");
         }}
       />
       {isShowMsgError && (
@@ -146,8 +166,11 @@ export default function PagePresenter({
           message={errorMessage?.message}
           subMessage={errorMessage?.subMessage}
           onCloseClick={() => {
+            /*
             setIsShowMsgError(false);
             setErrorMessage({});
+            */
+            onChangeErrorMessage();
           }}
         />
       )}
@@ -213,16 +236,16 @@ export default function PagePresenter({
             : dropdownList.map((v: DropdownItem) => (
                 <Dropdown
                   key={v.id}
-                  // 객체로 묶기
                   id={v.id}
                   title={v.title}
                   selected={v.selected}
                   contentType={v.content}
                   onSelectMenu={(selectedId: number) =>
+                    // container로 분리
                     onSelectDropdown(selectedId)
                   }
                   onSelectNft={(data: NftItem) => {
-                    console.log(data);
+                    // container로 분리
                     setNftDetail(data);
                     setIsShowNft(true);
                   }}

@@ -1,38 +1,24 @@
-// API 리스트
-// 중간 파라미터 처리도 여기서 진행
-
+import { SelectTermsType } from "@/model/props";
 import { getRequest, postRequest, putRequest } from "@/util/api.util";
 
-export const viewCount = async (id: number) => {
-  // 0은 전체, 1부터는 map
-  const res = await putRequest(`/viewcount/${id}`, {});
-  return !!res.success;
+export const updateViewCount = async (id: number) => {
+  return !!(await putRequest(`/viewcount/${id}`, {}))?.success;
 };
 
-// 미사용
-export const termsContent = async (type: "terms" | "privacy", lang: string) => {
+export const getTermsContent = async (type: SelectTermsType, lang: string) => {
   return await getRequest(`/terms/${type}/${lang}`);
 };
 
 export const checkSigned = async (walletAddr: string) => {
   const res = await getRequest(`/check/signed/${walletAddr}`);
-  if (res.success && res.data?.signed) {
-    return true;
-  } else {
-    return false;
-  }
+  return !!(res.success && res.data?.signed);
 };
 
 export const checkUserInfo = async (walletAddr: string) => {
   const res = await getRequest(`/check/info/${walletAddr}`);
-  if (res.success && res.data?.hasInfo) {
-    return true;
-  } else {
-    return false;
-  }
+  return !!(res.success && res.data?.hasInfo);
 };
 
-// getUserInfo
 export const getUserInfo = async () => {
   return await postRequest("/user/info", {}, true);
 };
@@ -53,24 +39,24 @@ export const login = async (
   });
 };
 
-export const nftList = async (categoryId: number) => {
+export const getNftList = async (categoryId: number) => {
   return await getRequest(`/nft/list/${categoryId}`);
 };
 
-export const nftDetail = async (artworkId: number) => {
+export const getNftDetail = async (artworkId: number) => {
   const data = await getRequest(`/nft/detail/${artworkId}`);
   return data.success && data.data ? data.data : undefined;
 };
 
-export const mapList = async () => {
+export const getMapList = async () => {
   return await getRequest("/map/list");
 };
 
-export const etherReady = async (artworkId: number) => {
+export const requestEtherReady = async (artworkId: number) => {
   return await postRequest(`/payment/ready/${artworkId}`, {}, true);
 };
 
-export const etherResult = async (
+export const sendEtherResult = async (
   orderId: number,
   successYn: "Y" | "N",
   param?: { txHash: string; tokenId: number }

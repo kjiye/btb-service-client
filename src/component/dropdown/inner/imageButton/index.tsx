@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { nftList } from "@/api/fetch";
+import { getNftList } from "@/api/fetch";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./dropdown-inner-imagebutton.module.scss";
@@ -39,7 +39,7 @@ export default function DropdownImageButtonList({ onSelectNft }: Props) {
   };
 
   const getList = async () => {
-    const getResult = await nftList(
+    const getResult = await getNftList(
       categoryList.find((v: ProductCategoryItem) => v.selected)?.id ||
         ProductCategoryDatasets[0].id
     );

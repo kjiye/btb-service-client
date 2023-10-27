@@ -1,11 +1,12 @@
+"use client";
+
 import { InjectedConnector } from "@web3-react/injected-connector";
-import MetaMaskOnboarding from "@metamask/onboarding";
 import { ethers } from "ethers";
 import { ContractABI } from "./abi";
 import { getUserSession } from "@/util/session.util";
 
-export const MAINNET_CHAINID = 1;
-export const SEPOLIA_CHAINID = 11155111;
+const MAINNET_CHAINID = 1;
+const SEPOLIA_CHAINID = 11155111;
 
 // 지갑 설정
 export const injected = new InjectedConnector({
@@ -66,18 +67,5 @@ export const callMintNft = async (tokenUri: string, price: string) => {
   }
 };
 
-// 테스트 후 미사용 상태
-export const checkInstalled = (isTabletBelow: boolean) => {
-  if (isTabletBelow) {
-    // 모바일 딥링크 이동
-    location.href = "https://metamask.app.link/arte-nft.art";
-  } else {
-    // 데스크탑
-    if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-      // 이미 확장프로그램 설치된 상태
-    } else {
-      // 메타마스크 설치 링크로 이동
-      location.href = "https://metamask.io/download";
-    }
-  }
-};
+// disconnectwallet
+// ehterready

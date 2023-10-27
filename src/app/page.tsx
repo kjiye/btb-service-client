@@ -2,11 +2,10 @@
 import { useEffect, useState } from "react";
 import PageComponent from "@/component/page";
 import Loading from "@/component/loading";
+import { updateViewCount } from "@/api/fetch";
 
-// 루트페이지 렌더 전 초기 처리가 필요한 부분
 async function getPreFetch() {
-  // const res = await fetch('https://api.example.com/...');
-  // return res.json();
+  await updateViewCount(0);
 }
 
 export default function Page() {

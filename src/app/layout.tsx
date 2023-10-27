@@ -1,9 +1,9 @@
-import { viewCount } from "@/api/fetch";
 import { LangContextProvider } from "@/context/lang.context";
+import { textBundle } from "@/util/format.util";
 import "./globals.scss";
 
 export const metadata = {
-  title: "Beyond the Birthplace",
+  title: textBundle().logo.title,
   icons: {
     icon: "/favicon.ico",
   },
@@ -17,7 +17,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  viewCount(0);
   return (
     <html lang="en">
       <body>

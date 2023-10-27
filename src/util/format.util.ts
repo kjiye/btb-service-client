@@ -15,10 +15,7 @@ export const checkTextFormat = (type: string, value: string) => {
 
 export const textEllipsis = (text: string) => {
   const length = 15;
-  if (text.length > length) {
-    text = text.substring(0, length - 2) + "...";
-  }
-  return text;
+  return text.length > length ? text.substring(0, length - 2) + "..." : text;
 };
 
 export const textBundle = () => {

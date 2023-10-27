@@ -2,8 +2,8 @@ import {
   checkSigned,
   checkUserInfo,
   login,
-  etherReady,
-  etherResult,
+  requestEtherReady,
+  sendEtherResult,
 } from "@/api/fetch";
 import { LangContext } from "@/context/lang.context";
 import {
@@ -19,7 +19,7 @@ import {
   removeUserSession,
   setUserSession,
 } from "@/util/session.util";
-import { callMintNft, injected } from "@/util/walletConnector.util";
+import { callMintNft, injected } from "@/util/wallet/transaction.util";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import {
   NoEthereumProviderError,
@@ -33,6 +33,7 @@ import text from "@/text.json";
 import PagePresenter from "./page.presenter";
 import { NftItem } from "@/model/api";
 import { textBundle } from "@/util/format.util";
+import useErrorMessageModal from "@/util/wallet/error.util";
 
 export default function PageContainer() {
   const isWalletConnected = checkIsWalletConnected();
@@ -60,8 +61,8 @@ export default function PageContainer() {
   const [isShowUser, setIsShowUser] = useState<boolean>(false);
 
   // 문구 에러 모달
-  const [isShowMsgError, setIsShowMsgError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageItem>({});
+  // const [isShowMsgError, setIsShowMsgError] = useState<boolean>(false);
+  // const [errorMessage, setErrorMessage] = useState<ErrorMessageItem>({});
 
   // 회원 가입 모달
   const [isShowJoin, setIsShowJoin] = useState<boolean>(false);
@@ -79,8 +80,14 @@ export default function PageContainer() {
   // 약관 모달
   const [isShowTerms, setIsShowTerms] = useState<boolean>(false);
   const [selectedTerms, setSelectedTerms] = useState<SelectTermsType>("terms");
+
+  // 커스텀 훅 테스트
+  const { isShowMsgError, errorMessage, onChangeErrorMessage } =
+    useErrorMessageModal();
+
   // 반응형 감지
   useEffect(() => {
+    // 이거 둘 중에 하나만 쓰는 방식으로 바꿔야 함
     setIsTabletBelow(isTabletOrBelow);
     setRsp(isTabletOrBelow ? "m" : "");
   }, [isTabletOrBelow, isTabletBelow]);
@@ -121,21 +128,27 @@ export default function PageContainer() {
         }, 1000);
       } else if (error instanceof UnsupportedChainIdError) {
         // 미지원 네트워크 연결 상태
+        /*
         setErrorMessage({
           message: textObj.wallet.unsupportedError.msg[lang],
           subMessage: textObj.wallet.unsupportedError.sub[lang],
         });
         setIsShowMsgError(true);
+        */
+        onChangeErrorMessage("unsupportedError");
       } else if (error instanceof UserRejectedRequestError) {
         // 사용자가 사이트 지갑 연결을 거부한 경우
         return false;
       } else {
+        onChangeErrorMessage("connectionError");
         // 알 수 없는 기타 에러
+        /*
         setErrorMessage({
           message: textObj.wallet.connectionError.msg[lang],
           subMessage: textObj.wallet.connectionError.sub[lang],
         });
         setIsShowMsgError(true);
+        */
       }
     });
   };
@@ -150,11 +163,14 @@ export default function PageContainer() {
 
   // 로그인 에러 모달
   const loginErrorModal = () => {
+    /*
     setErrorMessage({
       message: textObj.wallet.connectionError.msg[lang],
       subMessage: textObj.wallet.connectionError.sub[lang],
     });
     setIsShowMsgError(true);
+    */
+    onChangeErrorMessage("connectionError");
   };
 
   // 서명 검증 및 로그인 연결
@@ -206,9 +222,10 @@ export default function PageContainer() {
   }, [active, account, isWalletConnected]);
 
   // 이더결제 준비
+  /*
   const checkEtherReady = async (data: NftItem) => {
     const { nft, price, id } = data;
-    const checkResult = await etherReady(id);
+    const checkResult = await requestEtherReady(id);
 
     if (checkResult.success) {
       const { orderId } = checkResult.data;
@@ -217,9 +234,12 @@ export default function PageContainer() {
       !nftDetail && setNftDetail(data);
       setProcessModalType("process");
       setIsShowProcess(true);
-      const callResult = await callMintNft(nft.tokenUri, String(price));
+      const callResult: Record<string, any> = await callMintNft(
+        nft.tokenUri,
+        String(price)
+      );
       if (!callResult.success) {
-        await etherResult(orderId, "N");
+        await sendEtherResult(orderId, "N");
         setIsShowProcess(false);
         setErrorMessage({
           message:
@@ -230,14 +250,13 @@ export default function PageContainer() {
         });
         setIsShowMsgError(true);
       } else {
-        await etherResult(orderId, "Y", {
+        await sendEtherResult(orderId, "Y", {
           txHash: callResult?.transactionHash,
           tokenId: Number(callResult.tokenId),
         });
         setProcessModalType("done");
         setIsShowProcess(true);
       }
-      // router.refresh();
     } else {
       // 에러페이지 보여주기
       setIsShowNft(false);
@@ -248,6 +267,7 @@ export default function PageContainer() {
       setIsShowMsgError(true);
     }
   };
+  */
 
   const props = {
     rsp,
@@ -262,16 +282,22 @@ export default function PageContainer() {
     isShowNft,
     setIsShowNft,
     connectWallet,
-    checkEtherReady,
     isShowJoin,
     account,
     joinSign,
     loginErrorModal,
     setIsShowJoin,
     disconnectWallet,
-    setErrorMessage,
-    setIsShowMsgError,
-    isShowMsgError,
+    // setErrorMessage,
+    // setIsShowMsgError,
+    onChangeErrorMessage, // 신규
+    isShowMsgError, // 신규
+    onChangeProcessModal: (type?: ProcessModalType) => {
+      // 신규
+      // 추후 객체형 props로 변경하기
+      type && setProcessModalType(type);
+      setIsShowProcess(!!type);
+    },
     errorMessage,
     isWalletConnected,
     dropdownList,

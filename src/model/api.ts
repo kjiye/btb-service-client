@@ -37,9 +37,15 @@ export interface NftItem {
   fileExtension: string;
   fileSize: string;
   originFilePath: string;
-  originFileName: string;
+  originFilename: string;
   thumbnailFilePath: string;
   thumbnailFilename: string;
   viewCount: number;
   nft: NftInfo;
+}
+
+export interface NftOrderItem {
+  nftId: number;
+  artworksId: number;
+  paymentStatusId: number;
 }

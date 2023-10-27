@@ -8,6 +8,9 @@ export const ICON_SIZE_LARGE = 40;
 export const ICON_SIZE_SMALL = 30;
 export const ICON_SIZE_TINY = 21;
 
+export const MAINNET_CHAINID = 1;
+export const SEPOLIA_CHAINID = 11155111;
+
 export type SelectTermsType = "terms" | "privacy";
 export type DeviceType = "m" | "";
 export type LanguageType = "en" | "kr";
@@ -40,7 +43,19 @@ export const ProductCategoryDatasets: ProductCategoryItem[] = [
   { id: 2, title: "2023", selected: false },
 ];
 
+export type ErrorMessageType =
+  | "connectionError"
+  | "unsupportedError"
+  | "balanceError"
+  | "txCommonError"
+  | "inputUserError";
+
 export interface ErrorMessageItem {
   message?: string;
   subMessage?: string;
+}
+
+export interface ModalPropsItem {
+  isShow: boolean;
+  content: any;
 }

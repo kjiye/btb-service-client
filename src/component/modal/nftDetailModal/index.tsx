@@ -1,19 +1,19 @@
-import { getUserInfo, nftDetail } from "@/api/fetch";
+import { getUserInfo, getNftDetail } from "@/api/fetch";
 import { Suspense, useContext, useEffect, useState } from "react";
 import Modal from "@/component/modal";
 import styles from "./modal-nftdetailmodal.module.css";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import ModelRender from "./model";
+import ModelRenderer from "./modelrenderer";
 import { modelScaleMatch } from "@/util/format.util";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import { checkIsWalletConnected, getUserSession } from "@/util/session.util";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
 import * as THREE from "three";
-import { NftItem } from "@/model/api";
+import { NftItem, NftOrderItem } from "@/model/api";
+import NftDetailModalContainer from "./nftdetailmodal.container";
 
-// const CAMERA_SETTING = { position: [0, 0, -0.3], near: 0.1, far: 10 };
 const CAMERA_SETTING = {
   position: new THREE.Vector3(0, 0, -0.3),
   near: 0.1,
@@ -30,7 +30,7 @@ interface Props {
   data?: any;
 }
 
-// 선택된 데이터 넘겨오기
+/*
 export default function NftDetailModal({
   rsp = "",
   isShow,
@@ -45,32 +45,30 @@ export default function NftDetailModal({
   } = useContext(LangContext);
 
   const [isAvailable, setIsAvailable] = useState<boolean>(true);
-  const [isConnected, setIsConnected] = useState<boolean>(!!getUserSession());
   const [isShowDownload, setIsShowDownload] = useState<boolean>(false);
 
+  const isConnected = !!getUserSession();
+
   const getData = async (artworkId: number, checkUser: boolean) => {
-    const recentData = await nftDetail(artworkId);
+    const recentData: NftItem = await getNftDetail(artworkId);
     if (checkUser) {
       const res = await getUserInfo();
       if (res.success && res?.data?.nftOrder && res.data.nftOrder.length > 0) {
         const {
           data: { nftOrder },
         } = res;
-        const nfts = nftOrder.map((v: any) => {
+        const nfts = nftOrder.map((v: NftOrderItem) => {
           if (v.nftId && v.paymentStatusId === 2) {
             return v.nftId;
           }
         });
-        if (nfts.length > 0) {
-          setIsShowDownload(nfts.includes(artworkId));
-        }
+        nfts.length > 0 && setIsShowDownload(nfts.includes(artworkId));
       }
     }
     if (recentData) {
       const { soldEdition, totalEdition } = recentData;
       setIsAvailable(soldEdition < totalEdition);
     } else {
-      // 신규 데이터 불러오지 못했을 때 임시로 sold out 처리
       setIsAvailable(false);
     }
   };
@@ -101,7 +99,7 @@ export default function NftDetailModal({
               <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
               <pointLight position={[10, 10, 0]} />
               <Suspense>
-                <ModelRender
+                <ModelRenderer
                   url={`/img/glb/${data.thumbnailFilename.replace(
                     "png",
                     "glb"
@@ -142,3 +140,6 @@ export default function NftDetailModal({
     </Modal>
   );
 }
+*/
+
+export default NftDetailModalContainer;

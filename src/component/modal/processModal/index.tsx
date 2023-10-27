@@ -5,7 +5,7 @@ import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
 import { useContext } from "react";
-import { IMAGE_SIZE } from "@/model/props";
+import { IMAGE_SIZE, ProcessModalType } from "@/model/props";
 
 interface Props {
   rsp?: string;
