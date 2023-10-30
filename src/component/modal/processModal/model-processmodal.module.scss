@@ -2,6 +2,7 @@ $thumbnail_size: 400px;
 $image_size: 216px;
 
 .thumbnail {
+  display: block;
   margin: 62px auto 0;
   width: $thumbnail_size;
   height: $thumbnail_size;

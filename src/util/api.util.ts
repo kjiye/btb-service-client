@@ -1,8 +1,10 @@
 import { getUserSession } from "@/util/session.util";
 
-export const getRequest = async (path: string, param?: any) => {
-  const url = process.env.NEXT_PUBLIC_API_SERVER_URL + path;
-  // param이 있는 경우 querystring으로 변환하는 처리도 추가하기
+export const getRequest = async (path: string, param?: Record<string, any>) => {
+  let url =
+    process.env.NEXT_PUBLIC_API_SERVER_URL +
+    path +
+    (param ? new URLSearchParams(param).toString() : "");
   return await fetch(url, {
     cache: "no-store",
     headers: {
@@ -11,7 +13,7 @@ export const getRequest = async (path: string, param?: any) => {
   })
     .then((response) => response.json())
     .then((data) => data)
-    .catch((error) => false);
+    .catch(() => false);
 };
 
 export const postRequest = async (
@@ -34,7 +36,6 @@ export const postRequest = async (
       "x-access-token": token,
     };
   }
-
   return await fetch(url, {
     cache: "no-store",
     method: "POST",

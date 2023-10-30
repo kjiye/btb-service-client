@@ -11,6 +11,8 @@ export const ICON_SIZE_TINY = 21;
 export const MAINNET_CHAINID = 1;
 export const SEPOLIA_CHAINID = 11155111;
 
+export const PC_MAX_WIDTH = "(max-width: 1279px)";
+
 export type SelectTermsType = "terms" | "privacy";
 export type DeviceType = "m" | "";
 export type LanguageType = "en" | "kr";

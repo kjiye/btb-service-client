@@ -27,8 +27,9 @@ export default function Header({
   const { dispatch } = useContext(LangContext);
 
   const text = textBundle();
-  const en = text.util.language.title.en;
-  const kr = text.util.language.title.kr;
+  const { en, kr } = text.util.language.title;
+  const enSml = en.toLowerCase();
+  const krSml = kr.toLowerCase();
 
   return (
     <header className={`${styles.headerContainer} ${styles[rsp]}`}>
@@ -62,12 +63,10 @@ export default function Header({
               <div className={`${styles.btn}`}>
                 <button
                   className={`${
-                    lang === en.toLowerCase()
-                      ? styles.activeText
-                      : styles.inactiveText
+                    lang === enSml ? styles.activeText : styles.inactiveText
                   }`}
                   onClick={() => {
-                    dispatch({ type: en.toLowerCase() });
+                    dispatch({ type: enSml });
                   }}
                 >
                   {en}
@@ -75,12 +74,10 @@ export default function Header({
                 <span> / </span>
                 <button
                   className={`${
-                    lang === kr.toLowerCase()
-                      ? styles.activeText
-                      : styles.inactiveText
+                    lang === krSml ? styles.activeText : styles.inactiveText
                   }`}
                   onClick={() => {
-                    dispatch({ type: kr.toLowerCase() });
+                    dispatch({ type: krSml });
                   }}
                 >
                   {kr}

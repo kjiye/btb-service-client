@@ -7,6 +7,7 @@ export default function useErrorMessageModal() {
   const {
     state: { lang },
   } = useContext(LangContext);
+
   const [isShowMsgError, setIsShowMsgError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<ErrorMessageItem>({});
 

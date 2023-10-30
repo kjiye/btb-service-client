@@ -13,16 +13,9 @@ interface Props {
   isShow?: boolean;
   data?: any;
   type: ProcessModalType;
-  onCloseClick: () => void;
 }
 
-export default function ProcessModal({
-  rsp = "",
-  isShow,
-  data,
-  type,
-  onCloseClick,
-}: Props) {
+export default function ProcessModal({ rsp = "", isShow, data, type }: Props) {
   const textObj = Object(text);
   const {
     state: { lang },

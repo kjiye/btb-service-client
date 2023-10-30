@@ -2,11 +2,11 @@ import { LangContext } from "@/context/lang.context";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import RoundedSingleButton from "../button/roundedSingleButton";
-import User from "../user";
-import styles from "./drawer.module.css";
-import text from "../../text.json";
+import RoundedSingleButton from "@/component/button/roundedSingleButton";
+import User from "@/component/user";
+import styles from "./drawer.module.scss";
 import { DropdownItem, ICON_SIZE_SMALL, LanguageType } from "@/model/props";
+import { textBundle } from "@/util/format.util";
 
 interface Props {
   active: boolean;
@@ -32,10 +32,9 @@ export default function DrawerMenu({
   const { dispatch } = useContext(LangContext);
   const [isShowUser, setIsShowUser] = useState<boolean>(false);
 
-  const textObj = Object(text);
-  const en = textObj.util.language.title.en;
+  const text = textBundle();
+  const { en, kr } = text.util.language.title;
   const enSml = en.toLowerCase();
-  const kr = textObj.util.language.title.kr;
   const krSml = kr.toLowerCase();
 
   return (
@@ -49,7 +48,7 @@ export default function DrawerMenu({
         />
       </div>
       <div>
-        <Link href="/">{textObj.logo.title}</Link>
+        <Link href="/">{text.logo.title}</Link>
       </div>
       {dropdownList.map((v: DropdownItem) => (
         <div
@@ -62,7 +61,7 @@ export default function DrawerMenu({
       ))}
       {!active && (
         <div className={`${styles.menu}`} onClick={() => onLoginClick()}>
-          {textObj.util.login.title}
+          {text.util.login.title}
         </div>
       )}
       <div
@@ -95,14 +94,14 @@ export default function DrawerMenu({
             />
           </div>
           {isShowUser && (
-            <>
+            <div className={styles.userBtnWrapper}>
               <User />
               <RoundedSingleButton
-                name={textObj.common.button.logout[lang]}
+                name={text.common.button.logout[lang]}
                 type={"responsive"}
                 onClick={() => onLogoutClick()}
               />
-            </>
+            </div>
           )}
         </>
       )}

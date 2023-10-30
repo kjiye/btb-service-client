@@ -32,28 +32,23 @@ interface Props {
   isShowProcess: boolean;
   nftDetail?: NftItem;
   processModalType: ProcessModalType;
-  setIsShowProcess: (isShow: boolean) => void;
   isShowNft: boolean;
   setIsShowNft: (isShow: boolean) => void;
-  connectWallet: () => void;
+  onConnectWallet: () => void;
+  onDisconnectWallet: () => void;
   isShowJoin: boolean;
   account?: string | null;
   joinSign?: string;
-  loginErrorModal: () => void;
   setIsShowJoin: (isShow: boolean) => void;
-  disconnectWallet: () => void;
-  // setErrorMessage: (message: ErrorMessageItem) => void;
-  // setIsShowMsgError: (isShow: boolean) => void;
   onChangeErrorMessage: (type?: ErrorMessageType) => void;
   isShowMsgError: boolean;
   onChangeProcessModal: (type?: ProcessModalType) => void;
-
   errorMessage: ErrorMessageItem;
   isWalletConnected: boolean;
   dropdownList: DropdownItem[];
   onSelectDropdown: (selected: number) => void;
   isShowDrawer: boolean;
-  setIsShowDrawer: (isShow: boolean) => void;
+  onChangeDrawer: (isShow: boolean) => void;
   isTabletBelow: boolean;
   isShowUser: boolean;
   setIsShowUser: (isShow: boolean) => void;
@@ -71,18 +66,14 @@ export default function PagePresenter({
   isShowProcess,
   nftDetail,
   processModalType,
-  setIsShowProcess,
   isShowNft,
   setIsShowNft,
-  connectWallet,
+  onConnectWallet,
+  onDisconnectWallet,
   isShowJoin,
   account,
   joinSign,
-  loginErrorModal,
   setIsShowJoin,
-  disconnectWallet,
-  // setErrorMessage,
-  // setIsShowMsgError,
   onChangeErrorMessage,
   isShowMsgError,
   onChangeProcessModal,
@@ -91,7 +82,7 @@ export default function PagePresenter({
   dropdownList,
   onSelectDropdown,
   isShowDrawer,
-  setIsShowDrawer,
+  onChangeDrawer,
   isTabletBelow,
   isShowUser,
   setIsShowUser,
@@ -99,8 +90,6 @@ export default function PagePresenter({
   setSelectedTerms,
   text,
 }: Props) {
-  console.log("=========");
-  console.log(isShowMsgError);
   return (
     <>
       <TermsModal
@@ -117,75 +106,49 @@ export default function PagePresenter({
         isShow={isShowProcess}
         data={nftDetail}
         type={processModalType}
-        onCloseClick={() => setIsShowProcess(false)}
       />
-
-      {/* 
       <NftDetailModal
         rsp={rsp}
-        lang={lang}
-        isShow={isShowNft}
-        onCloseClick={() => setIsShowNft(false)}
-        onConnectWallet={() => connectWallet()}
-        onBuyClick={(data: NftItem) => checkEtherReady(data)}
-        data={nftDetail}
-      /> 
-      */}
-      <NftDetailModal
-        rsp={rsp}
-        onChangeErrorMessage={onChangeErrorMessage}
+        selectedData={nftDetail}
         isShow={isShowNft}
         setIsShowNft={setIsShowNft}
-        selectedData={nftDetail}
+        onChangeErrorMessage={onChangeErrorMessage}
         onChangeProcessModal={onChangeProcessModal}
+        onConnectWallet={onConnectWallet}
       />
       <UserInfoModal
         rsp={rsp}
         isShow={isShowJoin}
         account={account}
         sign={joinSign}
-        onSubmitError={() => loginErrorModal()}
+        onSubmitError={() => onChangeErrorMessage("connectionError")}
         onSubmitSuccess={() => setIsShowJoin(false)}
         onCloseClick={() => {
-          disconnectWallet();
+          // container 기능으로 묶기
+          onDisconnectWallet();
           setIsShowJoin(false);
-          /*
-          setErrorMessage({
-            message: text.wallet.inputUserError.msg[lang],
-            subMessage: text.wallet.inputUserError.sub[lang],
-          });
-          setIsShowMsgError(true);
-          */
           onChangeErrorMessage("inputUserError");
         }}
       />
-      {isShowMsgError && (
-        <ErrorMessageModal
-          rsp={rsp}
-          isShow={isShowMsgError}
-          message={errorMessage?.message}
-          subMessage={errorMessage?.subMessage}
-          onCloseClick={() => {
-            /*
-            setIsShowMsgError(false);
-            setErrorMessage({});
-            */
-            onChangeErrorMessage();
-          }}
-        />
-      )}
+      <ErrorMessageModal
+        rsp={rsp}
+        isShow={isShowMsgError}
+        message={errorMessage?.message}
+        subMessage={errorMessage?.subMessage}
+        onCloseClick={() => {
+          onChangeErrorMessage();
+        }}
+      />
       {isTabletBelow && (
         <DrawerMenu
           active={isWalletConnected}
           lang={lang}
           dropdownList={dropdownList}
-          onSelected={(selected: number) => onSelectDropdown(selected)}
+          onSelected={onSelectDropdown}
           isShowDrawer={isShowDrawer}
-          onCloseClick={() => {
-            setIsShowDrawer(false);
-          }}
-          onLoginClick={() => connectWallet()}
-          onLogoutClick={() => disconnectWallet()}
+          onCloseClick={() => onChangeDrawer(false)}
+          onLoginClick={() => onConnectWallet()}
+          onLogoutClick={() => onDisconnectWallet()}
         />
       )}
       <div className={`resContainer ${rsp}`}>
@@ -195,12 +158,13 @@ export default function PagePresenter({
           isTabletBelow={isTabletBelow}
           lang={lang}
           onMenuClick={() => {
-            setIsShowDrawer(true);
+            onChangeDrawer(true);
           }}
-          onLoginClick={() => connectWallet()}
+          onLoginClick={() => onConnectWallet()}
         />
         <div className={`mainWrapper ${rsp}`}>
           {!isTabletBelow && isWalletConnected && (
+            // global css 사용 중
             <div className={`userWrapper`}>
               <span
                 className={`userBtn`}
@@ -218,7 +182,7 @@ export default function PagePresenter({
                   <User />
                   <RoundedSingleButton
                     name={text.common.button.logout[lang]}
-                    onClick={() => disconnectWallet()}
+                    onClick={() => onDisconnectWallet()}
                   />
                 </span>
               )}
