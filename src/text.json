@@ -170,6 +170,10 @@
     "kr": "등록된 정보의 수정이 필요하신 분들은, 아래 메일 주소로 문의 바랍니다."
   },
   "join": {
+    "welcome": {
+      "en": "Welcome to Beyond the Birthplace",
+      "kr": "Welcome to Beyond the Birthplace"
+    },
     "title": {
       "connectTo": {
         "en": "Connected to",
@@ -340,6 +344,14 @@
     },
     "shop": {
       "title": "NFT Shop"
+    }
+  },
+  "user": {
+    "title": {
+      "account": {
+        "en": "Connected to:",
+        "kr": "Connected to:"
+      }
     }
   },
   "util": {

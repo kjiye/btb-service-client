@@ -9,7 +9,7 @@ import { NftItem, NftOrderItem } from "@/model/api";
 import { DeviceType, ErrorMessageType, ProcessModalType } from "@/model/props";
 import { textBundle } from "@/util/format.util";
 import { checkIsWalletConnected, getUserSession } from "@/util/session.util";
-import { callMintNft } from "@/util/wallet.util";
+import { callMintNft } from "@/util/wallet/transaction.util";
 import { useContext, useEffect, useState } from "react";
 import NftDetailModalPresenter from "./nftdetailmodal.presenter";
 
@@ -18,7 +18,7 @@ interface Props {
   rsp?: DeviceType;
   selectedData?: NftItem;
   isShow: boolean;
-  setIsShowNft: (isShow: boolean) => void;
+  onCloseClick: () => void;
   onChangeErrorMessage: (type?: ErrorMessageType) => void;
   onChangeProcessModal: (type?: ProcessModalType) => void;
   onConnectWallet: () => void;
@@ -28,7 +28,7 @@ export default function NftDetailModalContainer({
   rsp = "",
   isShow,
   selectedData,
-  setIsShowNft,
+  onCloseClick,
   onChangeErrorMessage,
   onChangeProcessModal,
   onConnectWallet,
@@ -83,7 +83,7 @@ export default function NftDetailModalContainer({
     const { nft, price, id } = data;
     const checkResult = await requestEtherReady(id);
 
-    setIsShowNft(false);
+    onCloseClick();
 
     if (!checkResult.success) {
       onChangeErrorMessage("txCommonError");
@@ -93,7 +93,10 @@ export default function NftDetailModalContainer({
     onChangeProcessModal("process");
 
     const { orderId } = checkResult.data;
-    const mintResult = await callMintNft(nft.tokenUri, String(price));
+    const mintResult: Record<string, any> = await callMintNft(
+      nft.tokenUri,
+      String(price)
+    );
 
     if (mintResult.success) {
       await sendEtherResult(orderId, "Y", {
@@ -139,9 +142,7 @@ export default function NftDetailModalContainer({
           : onConnectWallet();
       }
     },
-    onCloseClick: () => {
-      setIsShowNft(false);
-    },
+    onCloseClick,
   };
   return <NftDetailModalPresenter {...props} />;
 }

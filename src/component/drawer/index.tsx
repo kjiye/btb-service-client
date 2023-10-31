@@ -13,7 +13,7 @@ interface Props {
   lang: LanguageType;
   dropdownList: DropdownItem[];
   onSelected: (selected: number) => void;
-  isShowDrawer: boolean;
+  isShow: boolean;
   onCloseClick: (event?: React.MouseEvent<HTMLElement>) => void;
   onLoginClick: (event?: React.MouseEvent<HTMLElement>) => void;
   onLogoutClick: (event?: React.MouseEvent<HTMLElement>) => void;
@@ -24,7 +24,7 @@ export default function DrawerMenu({
   lang,
   dropdownList,
   onSelected,
-  isShowDrawer,
+  isShow,
   onCloseClick,
   onLoginClick,
   onLogoutClick,
@@ -38,7 +38,7 @@ export default function DrawerMenu({
   const krSml = kr.toLowerCase();
 
   return (
-    <div className={`${styles.wrapper} ${!isShowDrawer && styles.hide}`}>
+    <div className={`${styles.wrapper} ${!isShow && styles.hide}`}>
       <div className={styles.close} onClick={onCloseClick}>
         <Image
           src="/img/icon/icon_close.png"

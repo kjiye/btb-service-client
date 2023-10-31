@@ -61,3 +61,38 @@ export interface ModalPropsItem {
   isShow: boolean;
   content: any;
 }
+
+export interface UserInfoValidateItem {
+  name?: string;
+  nameErr?: boolean;
+  email?: string;
+  emailErr?: boolean;
+  phone?: string;
+  phoneErr?: boolean;
+}
+
+export type IsShowModalType =
+  | "drawer"
+  | "user"
+  | "join"
+  | "nft"
+  | "terms"
+  | "process";
+
+export const IsShowModalItemDatasets: IsShowModalItem = {
+  drawer: false,
+  user: false,
+  join: false,
+  nft: false,
+  terms: false,
+  process: false,
+};
+
+export interface IsShowModalItem {
+  drawer: boolean;
+  user: boolean;
+  join: boolean;
+  nft: boolean;
+  terms: boolean;
+  process: false;
+}

@@ -1,3 +1,4 @@
+"use client";
 import { MAINNET_CHAINID, SEPOLIA_CHAINID } from "@/model/props";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { BigNumber, ethers } from "ethers";

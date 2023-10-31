@@ -1,4 +1,4 @@
-import styles from "./input-baiscinput.module.css";
+import styles from "./input-baiscinput.module.scss";
 
 interface Props {
   title: string;

@@ -5,6 +5,8 @@ import {
   ErrorMessageItem,
   ErrorMessageType,
   ICON_SIZE_SMALL,
+  IsShowModalItem,
+  IsShowModalType,
   LanguageType,
   ProcessModalType,
   SelectTermsType,
@@ -16,7 +18,6 @@ import Footer from "@/component/footer";
 import Header from "@/component/header";
 import Image from "next/image";
 import ErrorMessageModal from "@/component/modal/errorMessageModal";
-// import NftDetailModal from "@/component/modal/nftDetailModal";
 import NftDetailModal from "@/component/modal/nftDetailModal";
 import ProcessModal from "@/component/modal/processModal";
 import TermsModal from "@/component/modal/termsModal";
@@ -25,108 +26,87 @@ import User from "@/component/user";
 
 interface Props {
   rsp: DeviceType;
+  isTabletBelow: boolean;
   lang: LanguageType;
-  isShowTerms: boolean;
   selectedTerms: SelectTermsType;
-  setIsShowTerms: (isShow: boolean) => void;
-  isShowProcess: boolean;
+  setSelectedTerms: (temsType: SelectTermsType) => void;
   nftDetail?: NftItem;
-  processModalType: ProcessModalType;
-  isShowNft: boolean;
-  setIsShowNft: (isShow: boolean) => void;
+  setNftDetail: (data: NftItem) => void;
+  isWalletConnected: boolean;
+  joinSign?: string;
+  account?: string | null;
   onConnectWallet: () => void;
   onDisconnectWallet: () => void;
-  isShowJoin: boolean;
-  account?: string | null;
-  joinSign?: string;
-  setIsShowJoin: (isShow: boolean) => void;
-  onChangeErrorMessage: (type?: ErrorMessageType) => void;
   isShowMsgError: boolean;
-  onChangeProcessModal: (type?: ProcessModalType) => void;
   errorMessage: ErrorMessageItem;
-  isWalletConnected: boolean;
+  onChangeErrorMessage: (type?: ErrorMessageType) => void;
+  isShowModal: IsShowModalItem;
+  onChangeModal: (type: IsShowModalType, isShow: boolean) => void;
+  processModalType: ProcessModalType;
+  onChangeProcessModal: (type?: ProcessModalType) => void;
   dropdownList: DropdownItem[];
   onSelectDropdown: (selected: number) => void;
-  isShowDrawer: boolean;
-  onChangeDrawer: (isShow: boolean) => void;
-  isTabletBelow: boolean;
-  isShowUser: boolean;
-  setIsShowUser: (isShow: boolean) => void;
-  setNftDetail: (data: NftItem) => void;
-  setSelectedTerms: (temsType: SelectTermsType) => void;
   text: Record<string, any>;
 }
 
 export default function PagePresenter({
   rsp,
+  isTabletBelow,
   lang,
-  isShowTerms,
   selectedTerms,
-  setIsShowTerms,
-  isShowProcess,
+  setSelectedTerms,
   nftDetail,
-  processModalType,
-  isShowNft,
-  setIsShowNft,
+  setNftDetail,
+  isWalletConnected,
+  joinSign,
+  account,
   onConnectWallet,
   onDisconnectWallet,
-  isShowJoin,
-  account,
-  joinSign,
-  setIsShowJoin,
-  onChangeErrorMessage,
   isShowMsgError,
-  onChangeProcessModal,
   errorMessage,
-  isWalletConnected,
+  onChangeErrorMessage,
+  isShowModal,
+  onChangeModal,
+  processModalType,
+  onChangeProcessModal,
   dropdownList,
   onSelectDropdown,
-  isShowDrawer,
-  onChangeDrawer,
-  isTabletBelow,
-  isShowUser,
-  setIsShowUser,
-  setNftDetail,
-  setSelectedTerms,
   text,
 }: Props) {
   return (
     <>
       <TermsModal
         rsp={rsp}
-        isShow={isShowTerms}
+        isShow={isShowModal.terms}
         selected={selectedTerms}
-        onCloseClick={() => {
-          setIsShowTerms(false);
-        }}
+        onCloseClick={() => onChangeModal("terms", false)}
       />
       <ProcessModal
         rsp={rsp}
         lang={lang}
-        isShow={isShowProcess}
+        isShow={isShowModal.process}
         data={nftDetail}
         type={processModalType}
       />
       <NftDetailModal
         rsp={rsp}
         selectedData={nftDetail}
-        isShow={isShowNft}
-        setIsShowNft={setIsShowNft}
+        isShow={isShowModal.nft}
+        onCloseClick={() => onChangeModal("nft", false)}
         onChangeErrorMessage={onChangeErrorMessage}
         onChangeProcessModal={onChangeProcessModal}
         onConnectWallet={onConnectWallet}
       />
       <UserInfoModal
         rsp={rsp}
-        isShow={isShowJoin}
+        isShow={isShowModal.join}
         account={account}
         sign={joinSign}
         onSubmitError={() => onChangeErrorMessage("connectionError")}
-        onSubmitSuccess={() => setIsShowJoin(false)}
+        onSubmitSuccess={() => onChangeModal("join", false)}
         onCloseClick={() => {
-          // container 기능으로 묶기
           onDisconnectWallet();
-          setIsShowJoin(false);
+          onChangeModal("join", false);
           onChangeErrorMessage("inputUserError");
         }}
       />
@@ -145,8 +125,8 @@ export default function PagePresenter({
           lang={lang}
           dropdownList={dropdownList}
           onSelected={onSelectDropdown}
-          isShowDrawer={isShowDrawer}
-          onCloseClick={() => onChangeDrawer(false)}
+          isShow={isShowModal.drawer}
+          onCloseClick={() => onChangeModal("drawer", false)}
           onLoginClick={() => onConnectWallet()}
           onLogoutClick={() => onDisconnectWallet()}
         />
@@ -157,18 +137,15 @@ export default function PagePresenter({
           rsp={rsp}
           isTabletBelow={isTabletBelow}
           lang={lang}
-          onMenuClick={() => {
-            onChangeDrawer(true);
-          }}
+          onMenuClick={() => onChangeModal("drawer", true)}
           onLoginClick={() => onConnectWallet()}
         />
         <div className={`mainWrapper ${rsp}`}>
           {!isTabletBelow && isWalletConnected && (
-            // global css 사용 중
             <div className={`userWrapper`}>
               <span
                 className={`userBtn`}
-                onClick={() => setIsShowUser(!isShowUser)}
+                onClick={() => onChangeModal("user", !isShowModal.user)}
               >
                 <Image
                   src="/img/icon/icon_user.png"
@@ -177,7 +154,7 @@ export default function PagePresenter({
                   height={ICON_SIZE_SMALL}
                 />
               </span>
-              {isShowUser && (
+              {isShowModal.user && (
                 <span className={`userInfo`}>
                   <User />
                   <RoundedSingleButton
@@ -189,11 +166,11 @@ export default function PagePresenter({
             </div>
           )}
           {isTabletBelow
-            ? !isShowDrawer && (
+            ? !isShowModal.drawer && (
                 <div>
                   {renderDropdownInnerComponent((data: NftItem) => {
                     setNftDetail(data);
-                    setIsShowNft(true);
+                    onChangeModal("nft", true);
                   }, dropdownList.find((v: DropdownItem) => !!v.selected)?.content)}
                 </div>
               )
@@ -205,13 +182,11 @@ export default function PagePresenter({
                   selected={v.selected}
                   contentType={v.content}
                   onSelectMenu={(selectedId: number) =>
-                    // container로 분리
                     onSelectDropdown(selectedId)
                   }
                   onSelectNft={(data: NftItem) => {
-                    // container로 분리
                     setNftDetail(data);
-                    setIsShowNft(true);
+                    onChangeModal("nft", true);
                   }}
                 />
               ))}
@@ -221,7 +196,7 @@ export default function PagePresenter({
             rsp={rsp}
             onSelectTerms={(selected: SelectTermsType) => {
               setSelectedTerms(selected);
-              setIsShowTerms(true);
+              onChangeModal("terms", true);
             }}
           />
         )}

@@ -1,3 +1,6 @@
+$primary_color: #000000;
+$secondary_color: #838383;
+
 /* 
 .container {
   width: 269px;
@@ -7,7 +10,7 @@
 
 .userWrapper {
   background-color: white;
-  color: black;
+  color: $primary_color;
   border-radius: 30px;
   padding: 20px;
   height: 268px;
@@ -23,5 +26,5 @@
   font-size: 14px;
   position: absolute;
   bottom: 30px;
-  color: #838383;
+  color: $secondary_color;
 }

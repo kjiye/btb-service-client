@@ -2,16 +2,16 @@ import { login } from "@/api/fetch";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import BasicInput from "@/component/input/basicInput";
 import Modal from "@/component/modal";
-import { checkTextFormat, textEllipsis } from "@/util/format.util";
+import { checkTextFormat, textBundle, textEllipsis } from "@/util/format.util";
 import { useContext, useEffect, useState } from "react";
 import styles from "./modal-userinfomodal.module.css";
 import { setUserSession } from "@/util/session.util";
-import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
+import { LanguageType, UserInfoValidateItem } from "@/model/props";
 
 interface Props {
   rsp?: string;
-  lang?: "en" | "kr";
+  lang?: LanguageType;
   isShow?: boolean;
   account?: string | null;
   sign?: string;
@@ -29,30 +29,16 @@ export default function UserInfoModal({
   onSubmitSuccess,
   onCloseClick,
 }: Props) {
-  const textObj = Object(text);
+  const text = textBundle();
   const {
     state: { lang },
   } = useContext(LangContext);
 
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
+  const [userInfo, setUserInfo] = useState<UserInfoValidateItem>();
 
-  // 유효성 검사
-  const [nameErr, setNameErr] = useState<boolean>();
-  const [emailErr, setEmailErr] = useState<boolean>();
-  const [phoneErr, setPhoneErr] = useState<boolean>();
-
-  // useEffect로 값 초기화 처리
-
-  useEffect(() => {
-    setName("");
-    setEmail("");
-    setPhone("");
-  }, []);
-
-  const updateUserInfo = async (name: string, email: string, phone: string) => {
+  const updateUserInfo = async (userInfo: UserInfoValidateItem) => {
     if (account) {
+      const { name, email, phone } = userInfo;
       const loginResult = await login(account, sign, email, name, phone);
       if (loginResult?.success) {
         const {
@@ -66,61 +52,75 @@ export default function UserInfoModal({
     }
   };
 
+  useEffect(() => {
+    setUserInfo({
+      name: "",
+      email: "",
+      phone: "",
+    });
+  }, []);
+
   return (
-    <Modal rsp={rsp} isShow={isShow} onCloseClick={() => onCloseClick()}>
-      <div>Welcome to Beyond the Birthplace</div>
+    <Modal rsp={rsp} isShow={isShow} onCloseClick={onCloseClick}>
+      <div>{text.join.welcome[lang]}</div>
       <BasicInput
-        title={textObj.join.title.connectTo[lang]}
+        title={text.join.title.connectTo[lang]}
         value={account ? textEllipsis(account) : ""}
         editable={false}
       />
       <BasicInput
-        title={textObj.join.title.name[lang]}
-        placeholder={textObj.join.placeholder.name[lang]}
-        value={name}
+        title={text.join.title.name[lang]}
+        placeholder={text.join.placeholder.name[lang]}
+        value={userInfo?.name || ""}
         editable={true}
-        validationMsg={nameErr ? textObj.join.validation.name[lang] : ""}
+        validationMsg={userInfo?.nameErr ? text.join.validation.name[lang] : ""}
         onChange={(text: string) => {
-          setNameErr(!(text.trim().length > 0));
-          setName(text);
+          setUserInfo({
+            ...userInfo,
+            name: text,
+            nameErr: !(text.trim().length > 0),
+          });
         }}
       />
       <BasicInput
-        title={textObj.join.title.email[lang]}
-        placeholder={textObj.join.placeholder.email[lang]}
-        value={email}
+        title={text.join.title.email[lang]}
+        placeholder={text.join.placeholder.email[lang]}
+        value={userInfo?.email || ""}
         editable={true}
-        validationMsg={emailErr ? textObj.join.validation.email[lang] : ""}
+        validationMsg={
+          userInfo?.emailErr ? text.join.validation.email[lang] : ""
+        }
         onChange={(text: string) => {
-          setEmailErr(!checkTextFormat("email", text));
-          setEmail(text);
+          setUserInfo({
+            ...userInfo,
+            email: text,
+            emailErr: !checkTextFormat("email", text),
+          });
         }}
       />
       <BasicInput
-        title={textObj.join.title.number[lang]}
-        placeholder={textObj.join.placeholder.number[lang]}
-        value={phone}
+        title={text.join.title.number[lang]}
+        placeholder={text.join.placeholder.number[lang]}
+        value={userInfo?.phone || ""}
         editable={true}
-        validationMsg={phoneErr ? textObj.join.validation.number[lang] : ""}
+        validationMsg={
+          userInfo?.phoneErr ? text.join.validation.number[lang] : ""
+        }
         onChange={(text: string) => {
-          setPhone(text);
-          setPhoneErr(!checkTextFormat("phone", text));
+          setUserInfo({
+            ...userInfo,
+            phone: text,
+            phoneErr: !checkTextFormat("phone", text),
+          });
         }}
       />
       <div className={`${styles.bottom}`}>
         <RoundedSingleButton
-          name={textObj.join.button.submit[lang]}
+          name={text.join.button.submit[lang]}
           disabled={
-            !(
-              name.length > 0 &&
-              phone.length > 0 &&
-              email.length > 0 &&
-              !nameErr &&
-              !phoneErr &&
-              !emailErr
-            )
+            userInfo?.nameErr || userInfo?.emailErr || userInfo?.phoneErr
           }
-          onClick={() => updateUserInfo(name, email, phone)}
+          onClick={() => userInfo && updateUserInfo(userInfo)}
         />
       </div>
     </Modal>

@@ -49,3 +49,11 @@ export interface NftOrderItem {
   artworksId: number;
   paymentStatusId: number;
 }
+
+export interface UserItem {
+  name?: string;
+  email?: string;
+  phone?: string;
+  nftOrder?: NftOrderItem[];
+  walletAddr?: string;
+}

@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 
 const nextCookies = cookies();
 
-// 나중에 httpOnly, secure 처리 추가힉
 export async function setTokenCookie(token: string) {
   nextCookies.set({
     name: "token",
