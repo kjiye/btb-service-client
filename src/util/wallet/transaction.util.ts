@@ -23,8 +23,8 @@ export const returnResult = (success: boolean, data?: Record<string, any>) => {
 
 /**
  * NFT 민팅 컨트랙 콜
- * @param tokenUri
- * @param price
+ * @param tokenUri 민팅할 작품의 고유 해시값 (IPFS 업로드)
+ * @param price 작품 가격
  */
 export const callMintNft = async (tokenUri: string, price: string) => {
   const walletAddr = await getUserSession()?.account;

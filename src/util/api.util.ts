@@ -18,7 +18,7 @@ export const getRequest = async (path: string, param?: Record<string, any>) => {
 
 export const postRequest = async (
   path: string,
-  param: Record<string, any>,
+  param: any,
   useToken?: boolean
 ) => {
   const url = process.env.NEXT_PUBLIC_API_SERVER_URL + path;

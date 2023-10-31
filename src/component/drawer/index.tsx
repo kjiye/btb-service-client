@@ -5,8 +5,9 @@ import { useContext, useState } from "react";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import User from "@/component/user";
 import styles from "./drawer.module.scss";
-import { DropdownItem, ICON_SIZE_SMALL, LanguageType } from "@/model/props";
+import { DropdownItem, LanguageType } from "@/model/props";
 import { textBundle } from "@/util/format.util";
+import { theme } from "../../../tailwind.config";
 
 interface Props {
   active: boolean;
@@ -43,8 +44,8 @@ export default function DrawerMenu({
         <Image
           src="/img/icon/icon_close.png"
           alt="close icon"
-          width={ICON_SIZE_SMALL}
-          height={ICON_SIZE_SMALL}
+          width={theme?.extend?.size[`icon-sm`]}
+          height={theme?.extend?.size[`icon-sm`]}
         />
       </div>
       <div>
@@ -89,8 +90,8 @@ export default function DrawerMenu({
             <Image
               src="/img/icon/icon_user.png"
               alt="user information icon"
-              width={ICON_SIZE_SMALL}
-              height={ICON_SIZE_SMALL}
+              width={theme?.extend?.size[`icon-sm`]}
+              height={theme?.extend?.size[`icon-sm`]}
             />
           </div>
           {isShowUser && (

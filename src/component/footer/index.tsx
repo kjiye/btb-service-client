@@ -1,8 +1,8 @@
 import { LangContext } from "@/context/lang.context";
 import { SelectTermsType } from "@/model/props";
+import { textBundle } from "@/util/format.util";
 import Link from "next/link";
 import { useContext } from "react";
-import text from "../../text.json";
 import styles from "./footer.module.scss";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function Footer({ rsp = "", onSelectTerms }: Props) {
-  const textObj = Object(text);
+  const text = textBundle();
   const {
     state: { lang },
   } = useContext(LangContext);
@@ -19,16 +19,16 @@ export default function Footer({ rsp = "", onSelectTerms }: Props) {
     <footer className={`${styles.footerContainer} ${styles[rsp]}`}>
       <ul className={`${styles.footerWrapper} ${styles[rsp]}`}>
         <li className={`${styles[rsp]}`}>
-          {textObj.footer.copyright.content[lang]}
+          {text.footer.copyright.content[lang]}
         </li>
         <li className={`${styles[rsp]} ${styles.clickable}`}>
-          <Link href={`mailto:${textObj.footer.email.content[lang]}`}>
-            {textObj.footer.email.content[lang]}
+          <Link href={`mailto:${text.footer.email.content[lang]}`}>
+            {text.footer.email.content[lang]}
           </Link>
         </li>
         <li className={`${styles[rsp]}`}>
-          <Link href={`${textObj.footer.instagram.content[lang]}`}>
-            {textObj.footer.instagram.title[lang]}
+          <Link href={`${text.footer.instagram.content[lang]}`}>
+            {text.footer.instagram.title[lang]}
           </Link>
         </li>
         <li
@@ -37,7 +37,7 @@ export default function Footer({ rsp = "", onSelectTerms }: Props) {
             onSelectTerms("terms");
           }}
         >
-          {textObj.footer.terms.title[lang]}
+          {text.footer.terms.title[lang]}
         </li>
         <li
           className={`${styles[rsp]} ${styles.clickable}`}
@@ -45,7 +45,7 @@ export default function Footer({ rsp = "", onSelectTerms }: Props) {
             onSelectTerms("privacy");
           }}
         >
-          {textObj.footer.privacy.title[lang]}
+          {text.footer.privacy.title[lang]}
         </li>
       </ul>
     </footer>

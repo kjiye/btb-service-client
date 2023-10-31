@@ -1,8 +1,9 @@
 import { LangContext } from "@/context/lang.context";
+import { SelectTermsType } from "@/model/props";
 import { useContext } from "react";
 
 interface Props {
-  selected: "terms" | "privacy";
+  selected: SelectTermsType;
 }
 
 export default function TermsContent({ selected }: Props) {
@@ -1216,7 +1217,6 @@ export default function TermsContent({ selected }: Props) {
       );
     }
   } else {
-    //privacy
     if (lang === "en") {
       return (
         <>

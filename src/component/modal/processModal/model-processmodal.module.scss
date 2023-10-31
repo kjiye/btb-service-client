@@ -6,12 +6,11 @@ $image_size: 216px;
   margin: 62px auto 0;
   width: $thumbnail_size;
   height: $thumbnail_size;
-}
-
-.thumbnail.m {
-  margin: 32px auto 0;
-  width: $image_size;
-  height: $image_size;
+  &.m {
+    margin: 32px auto 0;
+    width: $image_size;
+    height: $image_size;
+  }
 }
 
 .bottom {

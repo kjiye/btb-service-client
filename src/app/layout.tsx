@@ -9,9 +9,6 @@ export const metadata = {
   },
 };
 
-/*
-  Next.js 13 버전부터 기존의 _document, _app 컴포넌트를 RootLayout이 대체
-*/
 export default function RootLayout({
   children,
 }: {

@@ -4,7 +4,6 @@ import {
   DropdownItem,
   ErrorMessageItem,
   ErrorMessageType,
-  ICON_SIZE_SMALL,
   IsShowModalItem,
   IsShowModalType,
   LanguageType,
@@ -23,6 +22,7 @@ import ProcessModal from "@/component/modal/processModal";
 import TermsModal from "@/component/modal/termsModal";
 import UserInfoModal from "@/component/modal/userInfoModal";
 import User from "@/component/user";
+import { theme } from "../../../tailwind.config";
 
 interface Props {
   rsp: DeviceType;
@@ -150,8 +150,8 @@ export default function PagePresenter({
                 <Image
                   src="/img/icon/icon_user.png"
                   alt="user information icon"
-                  width={ICON_SIZE_SMALL}
-                  height={ICON_SIZE_SMALL}
+                  width={theme?.extend?.size[`icon-sm`]}
+                  height={theme?.extend?.size[`icon-sm`]}
                 />
               </span>
               {isShowModal.user && (

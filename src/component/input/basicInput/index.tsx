@@ -26,11 +26,7 @@ export default function BasicInput({
           contentEditable={editable}
           placeholder={placeholder}
           value={value}
-          onChange={(e) => {
-            if (onChange) {
-              onChange(e.target.value);
-            }
-          }}
+          onChange={(e) => onChange && onChange(e.target.value)}
         />
       </div>
       {validationMsg && validationMsg.length > 0 && (

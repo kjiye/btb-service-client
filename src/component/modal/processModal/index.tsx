@@ -2,21 +2,23 @@
 import styles from "./model-processmodal.module.scss";
 import Modal from "@/component/modal";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
-import text from "../../../text.json";
 import { LangContext } from "@/context/lang.context";
 import { useContext } from "react";
-import { IMAGE_SIZE, ProcessModalType } from "@/model/props";
+import { ProcessModalType } from "@/model/props";
+import { NftItem } from "@/model/api";
+import { textBundle } from "@/util/format.util";
+import { theme } from "../../../../tailwind.config";
 
 interface Props {
   rsp?: string;
   lang?: string;
   isShow?: boolean;
-  data?: any;
+  data?: NftItem;
   type: ProcessModalType;
 }
 
 export default function ProcessModal({ rsp = "", isShow, data, type }: Props) {
-  const textObj = Object(text);
+  const text = textBundle();
   const {
     state: { lang },
   } = useContext(LangContext);
@@ -25,30 +27,30 @@ export default function ProcessModal({ rsp = "", isShow, data, type }: Props) {
       {data ? (
         type === "process" ? (
           <>
-            <div>{textObj.payment.process.msg[lang]}</div>
-            <div>{textObj.payment.process.sub[lang]}</div>
+            <div>{text.payment.process.msg[lang]}</div>
+            <div>{text.payment.process.sub[lang]}</div>
             <img
-              className={`${styles.thumbnail} ${rsp === "m" && styles.m}`}
+              className={`${styles.thumbnail} ${styles[rsp]}`}
               src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${data.thumbnailFilePath}${data.thumbnailFilename}`}
               alt={data.title}
-              width={IMAGE_SIZE}
-              height={IMAGE_SIZE}
+              width={theme?.extend?.size[`img-md`]}
+              height={theme?.extend?.size[`img-md`]}
             />
           </>
         ) : (
           <>
-            <div>{textObj.payment.complete[lang]}</div>
-            <div>{`${data.title} / ${data.year} / Price: ${data.price} ETH / Type: ${data.fileExtension} / Dimension: ${data.Dimension} / Description: ${data.description}`}</div>
+            <div>{text.payment.complete[lang]}</div>
+            <div>{`${data.title} / ${data.year} / ${text.product.price[lang]}: ${data.price} ${text.product.priceUnit[lang]} / Type: ${data.fileExtension} / ${text.product.dimension[lang]}: ${data.Dimension} / ${text.product.description[lang]}: ${data.description}`}</div>
             <img
-              className={`${styles.thumbnail} ${rsp === "m" && styles.m}`}
+              className={`${styles.thumbnail} ${styles[rsp]}`}
               src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${data.thumbnailFilePath}${data.thumbnailFilename}`}
               alt={data.title}
-              width={IMAGE_SIZE}
-              height={IMAGE_SIZE}
+              width={theme?.extend?.size[`img-md`]}
+              height={theme?.extend?.size[`img-md`]}
             />
             <div className={`${styles.bottom}`}>
               <RoundedSingleButton
-                name={"OK"}
+                name={text.common.button.ok[lang]}
                 disabled={false}
                 onClick={() => {
                   typeof window !== "undefined" && window.location.reload();

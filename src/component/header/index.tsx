@@ -1,11 +1,11 @@
 import { LangContext } from "@/context/lang.context";
-import { DeviceType, ICON_SIZE_LARGE, LanguageType } from "@/model/props";
+import { DeviceType, LanguageType } from "@/model/props";
 import { textBundle } from "@/util/format.util";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
 import styles from "./header.module.scss";
-// import text from "../../text.json";
+import { theme } from "../../../tailwind.config";
 
 interface Props {
   active: boolean;
@@ -45,8 +45,8 @@ export default function Header({
               <Image
                 src="/img/icon/icon_hamburger.png"
                 alt={"mobile menu button"}
-                width={ICON_SIZE_LARGE}
-                height={ICON_SIZE_LARGE}
+                width={theme?.extend?.size[`icon-lg`]}
+                height={theme?.extend?.size[`icon-lg`]}
               />
             </button>
           ) : (

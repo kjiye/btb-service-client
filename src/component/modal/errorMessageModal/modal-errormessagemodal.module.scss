@@ -1,3 +1,5 @@
+$secondary_color: #838383;
+
 .bottom {
   position: absolute;
   bottom: 30px;
@@ -5,5 +7,5 @@
 }
 
 .subMessage {
-  color: #838383;
+  color: $secondary_color;
 }

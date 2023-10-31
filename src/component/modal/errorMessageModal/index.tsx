@@ -1,13 +1,14 @@
-import styles from "./modal-errormessagemodal.module.css";
+import styles from "./modal-errormessagemodal.module.scss";
 import Modal from "@/component/modal";
 import RoundedSingleButton from "@/component/button/roundedSingleButton";
 import { textBundle } from "@/util/format.util";
 import { LangContext } from "@/context/lang.context";
 import { useContext } from "react";
+import { LanguageType } from "@/model/props";
 
 interface Props {
   rsp?: string;
-  lang?: "en" | "kr";
+  lang?: LanguageType;
   isShow?: boolean;
   message?: string;
   subMessage?: string;

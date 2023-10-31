@@ -80,7 +80,7 @@ export default function PageContainer() {
 
   /**
    * 서명 검증 및 회원가입
-   * @param account
+   * @param account 메타마스크 연결 계정
    */
   const checkSignedAPI = async (account: string) => {
     if (!(await checkSigned(account))) {
@@ -124,9 +124,6 @@ export default function PageContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active, account, isWalletConnected]);
 
-  /**
-   * 반응형 감지
-   */
   useEffect(() => {
     setIsTabletBelow(isTabletOrBelow);
     setRsp(isTabletOrBelow ? "m" : "");

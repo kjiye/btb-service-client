@@ -7,7 +7,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import Modal from "@/component/modal";
 import ModelRenderer from "@/component/modal/nftDetailModal/modelrenderer";
-import styles from "./modal-nftdetailmodal.module.css";
+import styles from "./modal-nftdetailmodal.module.scss";
 import * as THREE from "three";
 
 const CAMERA_SETTING = {

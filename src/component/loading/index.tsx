@@ -1,9 +1,10 @@
 import { textBundle } from "@/util/format.util";
 import styles from "./loading.module.scss";
 import Image from "next/image";
-import { ICON_SIZE_LARGE, LoadingViewType } from "@/model/props";
+import { LoadingViewType } from "@/model/props";
 import { LangContext } from "@/context/lang.context";
 import { useContext } from "react";
+import { theme } from "../../../tailwind.config";
 
 interface Props {
   type?: LoadingViewType;
@@ -23,8 +24,8 @@ export default function Loading({ type = "text" }: Props) {
       <Image
         src="/img/icon/loading.gif"
         alt="loading icon"
-        width={ICON_SIZE_LARGE}
-        height={ICON_SIZE_LARGE}
+        width={theme?.extend?.size[`icon-lg`]}
+        height={theme?.extend?.size[`icon-lg`]}
         className={styles.icon}
       />
     </div>

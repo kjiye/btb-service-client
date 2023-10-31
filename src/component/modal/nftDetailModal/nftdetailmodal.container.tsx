@@ -14,7 +14,6 @@ import { useContext, useEffect, useState } from "react";
 import NftDetailModalPresenter from "./nftdetailmodal.presenter";
 
 interface Props {
-  // Props로 내려오는 방식 제거 가능
   rsp?: DeviceType;
   selectedData?: NftItem;
   isShow: boolean;
@@ -46,8 +45,8 @@ export default function NftDetailModalContainer({
 
   /**
    * NFT 상세정보 조회
-   * @param artworkId
-   * @param checkUser
+   * @param artworkId 작품 고유번호
+   * @param checkUser 연결된 지갑 계정 유무 여부
    */
   const getData = async (artworkId: number, checkUser: boolean) => {
     const newData: NftItem = await getNftDetail(artworkId);
@@ -77,7 +76,7 @@ export default function NftDetailModalContainer({
 
   /**
    * 이더리움 결제 준비
-   * @param data NftItem
+   * @param data 구매할 NFT 객체
    */
   const checkEtherReady = async (data: NftItem) => {
     const { nft, price, id } = data;

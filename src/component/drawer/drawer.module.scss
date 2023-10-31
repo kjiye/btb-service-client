@@ -17,10 +17,6 @@ $secondary_color: #838383;
   }
 }
 
-// .wrapper.hide {
-//   display: none;
-// }
-
 .close {
   position: fixed;
   top: 15px;
@@ -37,28 +33,6 @@ $secondary_color: #838383;
   width: calc(100% - $padding * 2);
   box-sizing: border-box;
 }
-
-/* 
-.userWrapper {
-  background-color: white;
-  color: black;
-  border-radius: 30px;
-  padding: 30px 15px;
-  height: 268px;
-  box-sizing: border-box;
-  margin: 15px 0;
-  position: relative;
-}
-
-.textSection {
-  margin-top: 22px;
-} 
-.textBottom {
-  position: absolute;
-  bottom: 30px;
-  color: #838383;
-}
-*/
 
 .activeText {
   color: white;

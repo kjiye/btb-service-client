@@ -1,7 +1,6 @@
-// dimmed 처리된 화면 + 모달 팝업 세트로 구성
-import { ICON_SIZE_TINY } from "@/model/props";
 import Image from "next/image";
 import styles from "./modal.module.scss";
+import { theme } from "../../../tailwind.config";
 
 interface Props {
   isShow?: boolean;
@@ -29,8 +28,8 @@ export default function Modal({
             <Image
               src="/img/icon/icon_close.png"
               alt="close icon"
-              width={ICON_SIZE_TINY}
-              height={ICON_SIZE_TINY}
+              width={theme?.extend?.size[`icon-tn`]}
+              height={theme?.extend?.size[`icon-tn`]}
             />
           </div>
         )}

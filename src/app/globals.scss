@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* 라이트모드이자 기본 값으로 적용할 스타일을 정의 */
 :root {
   --foreground-rgb: 255, 255, 255;
@@ -80,19 +84,17 @@ $secondary_color: #838383;
   width: 1280px;
   margin: 0 auto;
   position: relative;
+  &.m {
+    width: 100%;
+  }
 }
-.resContainer.m {
-  width: 100%;
-}
-
 /* 메인 드롭다운 래퍼 */
 .mainWrapper {
   width: 100%;
   padding: 64px 0;
-}
-
-.mainWrapper.m {
-  padding: 64px 15px 0;
+  &.m {
+    padding: 64px 15px 0;
+  }
 }
 
 /* 메인 사용자 정보 (PC) */
@@ -101,10 +103,9 @@ $secondary_color: #838383;
   right: 14px;
   width: 269px;
   z-index: 9;
-}
-
-.userWrapper span {
-  display: inline-block;
+  span {
+    display: inline-block;
+  }
 }
 
 .userBtn {
@@ -121,51 +122,30 @@ $secondary_color: #838383;
   background-color: beige;
   width: 1280px;
   height: 1000px;
+  &.t {
+    width: 768px;
+    height: 1000px;
+    background-color: bisque;
+  }
+  &.m {
+    width: 100%;
+    height: 1000px;
+    background-color: gold;
+  }
 }
 
-.content.t {
-  width: 768px;
-  height: 1000px;
-  background-color: bisque;
-}
-
-.content.m {
-  width: 100%;
-  height: 1000px;
-  background-color: gold;
-}
-
-/*
-.boxWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.boxWrapper.t {
-  justify-content: center;
-}
-
-.boxWrapper.m {
-  justify-content: center;
-}
-*/
 .box {
   width: 632px;
   height: 317px;
   border-radius: 14px;
   background-color: white;
   margin-bottom: 14px;
-}
-
-.box.t {
-  width: 530px;
-  height: 265px;
-}
-
-.box.m {
-  width: 498px;
-  height: 249px;
+  &.t {
+    width: 530px;
+    height: 265px;
+  }
+  &.m {
+    width: 498px;
+    height: 249px;
+  }
 }

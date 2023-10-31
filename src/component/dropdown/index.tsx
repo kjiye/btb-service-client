@@ -11,7 +11,7 @@ interface Props {
   selected?: boolean;
   contentType: DropdownChildType;
   onSelectMenu: (selectedId: number) => void;
-  onSelectNft: (data: any) => void;
+  onSelectNft: (data: NftItem) => void;
 }
 
 export const renderDropdownInnerComponent = (

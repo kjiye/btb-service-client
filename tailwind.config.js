@@ -1,29 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    // "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    // "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    // "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/component/**/*.{ts,tsx}",
-  ],
+  content: ["./src/component/**/*.{ts,tsx}"],
   theme: {
+    screens: {
+      sm: "768px",
+      lg: "1280px",
+    },
+    colors: {
+      black: "#000000",
+      white: "#ffffff",
+      gray: "#868686",
+    },
     extend: {
-      colors: {},
-      width: {
-        icon: 21,
-      },
-      height: {
-        icon: 21,
+      size: {
+        "img-md": 216,
+        "icon-tn": 21,
+        "icon-sm": 30,
+        "icon-md": 35,
+        "icon-lg": 40,
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-    },
-    screen: {
-      sm: "768px",
-      lg: "1280px",
     },
   },
   plugins: [],

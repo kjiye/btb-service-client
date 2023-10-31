@@ -2,12 +2,6 @@ import { textBundle } from "@/util/format.util";
 
 const text = textBundle();
 
-// tailwind theme 으로 변경 적용하기
-export const IMAGE_SIZE = 216;
-export const ICON_SIZE_LARGE = 40;
-export const ICON_SIZE_SMALL = 30;
-export const ICON_SIZE_TINY = 21;
-
 export const MAINNET_CHAINID = 1;
 export const SEPOLIA_CHAINID = 11155111;
 

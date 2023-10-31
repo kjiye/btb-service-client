@@ -4,7 +4,7 @@ import BasicInput from "@/component/input/basicInput";
 import Modal from "@/component/modal";
 import { checkTextFormat, textBundle, textEllipsis } from "@/util/format.util";
 import { useContext, useEffect, useState } from "react";
-import styles from "./modal-userinfomodal.module.css";
+import styles from "./modal-userinfomodal.module.scss";
 import { setUserSession } from "@/util/session.util";
 import { LangContext } from "@/context/lang.context";
 import { LanguageType, UserInfoValidateItem } from "@/model/props";
