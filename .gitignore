@@ -25,10 +25,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # dotenv environment variable files
-# .env.development
+.env.development
 .env.production
 .env
-.env.local
 
 # vercel
 .vercel
