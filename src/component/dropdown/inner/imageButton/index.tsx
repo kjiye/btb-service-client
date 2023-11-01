@@ -8,6 +8,7 @@ import { ProductCategoryDatasets, ProductCategoryItem } from "@/model/props";
 import { NftItem } from "@/model/api";
 import { textBundle } from "@/util/format.util";
 import { theme } from "../../../../../tailwind.config";
+import Loading from "@/component/loading";
 
 interface Props {
   onSelectNft: (data: NftItem) => void;
@@ -104,7 +105,7 @@ export default function DropdownImageButtonList({ onSelectNft }: Props) {
           );
         })
       ) : (
-        <div>{text.common.msg.loading[lang]}</div>
+        <Loading />
       )}
     </div>
   );

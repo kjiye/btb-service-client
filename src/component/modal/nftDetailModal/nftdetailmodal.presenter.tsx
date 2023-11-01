@@ -9,6 +9,7 @@ import Modal from "@/component/modal";
 import ModelRenderer from "@/component/modal/nftDetailModal/modelrenderer";
 import styles from "./modal-nftdetailmodal.module.scss";
 import * as THREE from "three";
+import Loading from "@/component/loading";
 
 const CAMERA_SETTING = {
   position: new THREE.Vector3(0, 0, -0.3),
@@ -95,7 +96,7 @@ export default function NftDetailModalPresenter({
           </div>
         </>
       ) : (
-        <div>{text.common.msg.loading[lang]}</div>
+        <Loading />
       )}
     </Modal>
   );
