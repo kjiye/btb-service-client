@@ -36,5 +36,16 @@
     ├── model : TS 타입 선언 관리 (props 관련)
     ├── type : TS 커스텀 타입 정의 (내장 객체, 의존성 패키지 관련)
     └── util : 반복 사용 함수 유틸화, 커스텀 훅 생성 관리
-</pre>
+</pre>  
+
+## Screenshot  
+
+<details>
+  <summary>Desktop Ver</summary>
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/af86ece0-1af7-44fb-a9fc-2aae2f508c28" alt="ref1">  
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/a8f19204-1f4c-4074-b0b5-3c2188374ee8" alt="ref2">
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/06a4328f-b63d-4941-8480-3979d9d72207" alt="ref3">
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/37533512-0613-4580-bf87-db973d5fba3b" alt="ref4">
+</details>
+
     
