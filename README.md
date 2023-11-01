@@ -30,7 +30,7 @@
 <pre>
 └── src
     ├── api : REST API 호출부 관리
-    ├── app : Next.js 파일 시스템, 서버 컴포넌트 관리
+    ├── app : Next.js 파일 시스템 라우터, 서버 컴포넌트 관리
     ├── component : 인터페이스 공통 요소를 header, footer, button, input, modal 등과 같은 속성 분류로 관리
     ├── context : React Context API provider 생성 관리
     ├── model : TS 타입 선언 관리 (props 관련)
