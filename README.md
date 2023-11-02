@@ -42,10 +42,11 @@
 
 <details>
   <summary>Desktop Ver</summary>
-  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/af86ece0-1af7-44fb-a9fc-2aae2f508c28" alt="ref1">  
-  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/a8f19204-1f4c-4074-b0b5-3c2188374ee8" alt="ref2">
-  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/06a4328f-b63d-4941-8480-3979d9d72207" alt="ref3">
-  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/37533512-0613-4580-bf87-db973d5fba3b" alt="ref4">
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/84094502-0437-435b-8e35-d8cc13252ce6" alt="screenshot1">
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/7cdbd135-994e-48b1-82db-a59af5d5f097" alt="screenshot2">
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/be58cf00-a4f8-494b-8e28-61c426482c32" alt="screenshot3">
+  <img src="https://github.com/kjiye/btb-service-client/assets/31784160/002b03bd-d156-4a61-8fc9-f3dda9e3cd73" alt="screenshot4">
 </details>
+
 
     
