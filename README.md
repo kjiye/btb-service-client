@@ -41,6 +41,14 @@
 ## Screenshot  
 
 <details>
+  <summary>Mobile Ver</summary>
+  <img width="300" src="https://github.com/kjiye/btb-service-client/assets/31784160/43f04287-fdaf-4736-a889-aec9313a7c42" alt="screenshot1">
+  <img width="300" src="https://github.com/kjiye/btb-service-client/assets/31784160/c8df626f-a064-4032-bfab-e22fd6e744e9" alt="screenshot2">
+  <img width="300" src="https://github.com/kjiye/btb-service-client/assets/31784160/8578551c-fc40-4ea6-88fa-b4b50880cff6" alt="screenshot3">
+  <img width="300" src="https://github.com/kjiye/btb-service-client/assets/31784160/7f0a0c90-5acc-4589-be3f-5418327fabdc" alt="screenshot4">
+  <img width="300" src="https://github.com/kjiye/btb-service-client/assets/31784160/0fd1e650-aefe-4cc2-9b43-2ec3fde4cd3d" alt="screenshot5">
+</details>
+<details>
   <summary>Desktop Ver</summary>
   <img src="https://github.com/kjiye/btb-service-client/assets/31784160/84094502-0437-435b-8e35-d8cc13252ce6" alt="screenshot1">
   <img src="https://github.com/kjiye/btb-service-client/assets/31784160/7cdbd135-994e-48b1-82db-a59af5d5f097" alt="screenshot2">
